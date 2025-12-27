@@ -95,7 +95,7 @@ const Hero = () => {
           DESKTOP ( >= sm )
           ========================= */}
       <div className='hidden sm:block'>
-        <div className='mx-auto max-w-[1500px] px-8 py-20 md:px-16'>
+        <div className='mx-auto max-w-[1500px] px-12 py-14 md:py-18 md:px-16'>
           <div className='relative grid items-start gap-14'>
             {/* LEFT */}
             <div className='relative z-10 mr-50'>
@@ -104,7 +104,7 @@ const Hero = () => {
               </h1>
 
               <div className='relative mt-2 bg-darkpeach py-6 pl-8 pr-24'>
-                <div className='max-w-[58rem] space-y-5 text-sm lg:text-md leading-tight'>
+                <div className='max-w-[58rem] space-y-5 text-xs md:text-sm lg:text-md leading-tight'>
                   <p>
                     Hey there! I&apos;m RJ, a Computer Science major and
                     Electrical Engineering minor at the University of Florida
@@ -169,7 +169,7 @@ const Hero = () => {
                   alt='Washi tape'
                   className='h-28 w-auto pointer-events-none absolute -right-17 z-20 w-[280px] rotate-[50deg] select-none'
                 />
-                <div className='bg-[#FBF7F0] p-4 pb-8 rotate-[10deg]'>
+                <div className='bg-[#FBF7F0] p-3 pb-6 rotate-[10deg]'>
                   <img
                     src={Headshot}
                     alt='RJ Tabelon Headshot'
