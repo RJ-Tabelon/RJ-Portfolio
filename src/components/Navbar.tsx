@@ -7,7 +7,10 @@ export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const linkClass: NavLinkProps['className'] = ({ isActive }) =>
-    isActive ? 'font-semibold' : 'text-hover';
+    [
+      'transition-colors',
+      isActive ? 'font-semibold' : 'text-hover'
+    ].join(' ');
 
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
@@ -19,7 +22,7 @@ export default function Navbar() {
 
   return (
     <nav className='relative flex items-center justify-between px-6 py-4 border-b'>
-      <h1 className='text-xl font-bold'>Rainier Joshua (RJ) Tabelon</h1>
+      <h1 className='lg:text-lg font-bold'>Rainier Joshua (RJ) Tabelon</h1>
 
       {/* Desktop Navigation */}
       <div className='hidden md:flex gap-6'>
@@ -65,7 +68,7 @@ export default function Navbar() {
             isMenuOpen ? 'translate-x-0' : 'translate-x-full'
           }`}
         >
-          <div className='flex items-center justify-end p-4.5 border-b'>
+          <div className='flex items-center justify-end p-4 lg:p-4.5 border-b'>
             <button
               className='cursor-pointer'
               onClick={() => setIsMenuOpen(false)}
