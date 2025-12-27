@@ -12,7 +12,7 @@ html {
 @layer utilities {
   /* Text */
   .text-primary{
-    @apply text-[#B23A48]
+    @apply text-[#81353B]
   }
 
   .text-hover{
@@ -29,6 +29,6 @@ html {
   }
 
   .bg-darkpeach {
-    @apply bg-[#FFBC9E]
+    @apply bg-[#fabc9f]
   }
 }
