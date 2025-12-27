@@ -1,15 +1,16 @@
 import { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import type { NavLinkProps } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const linkClass = ({ isActive }) =>
+  const linkClass: NavLinkProps['className'] = ({ isActive }) =>
     isActive ? 'font-semibold' : 'text-hover';
 
   useEffect(() => {
-    const onKeyDown = e => {
+    const onKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') setIsMenuOpen(false);
     };
     if (isMenuOpen) window.addEventListener('keydown', onKeyDown);
