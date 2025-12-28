@@ -3,7 +3,7 @@ import ExperienceSection from "../sections/ExperienceSection"
 
 const Home = () => {
   return (
-    <div className='bg-[#FBF7F0]'>
+    <div>
       <Hero />
       <ExperienceSection />
     </div>

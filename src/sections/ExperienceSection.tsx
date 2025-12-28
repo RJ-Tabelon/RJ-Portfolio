@@ -1,147 +1,344 @@
-import { ExperienceType, experiences } from '@/data/experience';
+import { useEffect, useMemo, useRef, useState } from 'react';
+import { experiences } from '@/data/experience';
+import type { ExperienceType } from '@/data/experience';
+import MiniExperienceCard from '@/components/MiniExperienceCard';
+import LargeExperienceCard from '@/components/LargeExperienceCard';
+
+const monthMap: Record<string, number> = {
+  Jan: 0,
+  Feb: 1,
+  Mar: 2,
+  Apr: 3,
+  May: 4,
+  Jun: 5,
+  Jul: 6,
+  Aug: 7,
+  Sep: 8,
+  Oct: 9,
+  Nov: 10,
+  Dec: 11
+};
+
+const toValue = (label: string) => {
+  if (label === 'Present') return Number.POSITIVE_INFINITY;
+  const [month, year] = label.split(' ');
+  const m = monthMap[month as keyof typeof monthMap] ?? 0;
+  const y = Number(year) || 0;
+  return y * 12 + m;
+};
+
+const buildCurvePath = (count: number) => {
+  // one "curve segment" per experience
+  if (count <= 0) return '';
+
+  const startX = 90;
+  const leftCtrlX = 25;
+  const rightCtrlX = 155;
+
+  const step = 100 / count;
+
+  let d = `M ${startX} 0`;
+  for (let i = 0; i < count; i += 1) {
+    const y0 = i * step;
+    const y1 = (i + 1) * step;
+    const ctrlY = (y0 + y1) / 2;
+
+    // alternate which side the "hill" bulges to
+    const ctrlX = i % 2 === 0 ? leftCtrlX : rightCtrlX;
+
+    d += ` Q ${ctrlX} ${ctrlY}, ${startX} ${y1}`;
+  }
+  return d;
+};
+
+const SideImage = ({
+  exp,
+  side
+}: {
+  exp: ExperienceType;
+  side: 'left' | 'right';
+}) => {
+  const pushTowardLine = side === 'left' ? '-translate-x-20' : 'translate-x-20';
+  const pad = side === 'left' ? 'pr-1 justify-end' : 'pl-1 justify-start';
+
+  return (
+    <div className={`w-full max-w-[360px] ${pad} relative flex items-center`}>
+      <div
+        className={`${pushTowardLine} relative inline-flex items-center justify-center border border-color bg-white z-10 opacity-85`}
+      >
+        <img
+          src={exp.image}
+          alt={exp.company}
+          loading='lazy'
+          className='max-h-16 w-auto  object-cover'
+        />
+        <div className='pointer-events-none absolute inset-0 mix-blend-overlay' />
+      </div>
+    </div>
+  );
+};
 
 const ExperienceSection = () => {
+  const [selectedExp, setSelectedExp] = useState<ExperienceType | null>(null);
+  const [selectedType, setSelectedType] = useState<
+    ExperienceType['type'] | 'All'
+  >('All');
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const filterRef = useRef<HTMLDivElement | null>(null);
+
+  const typeOptions = useMemo(
+    () => ['All', ...Array.from(new Set(experiences.map(exp => exp.type)))],
+    []
+  );
+
+  const sortedExperiences = useMemo(
+    () =>
+      [...experiences].sort((a, b) => {
+        const startDiff = toValue(b.startDate) - toValue(a.startDate);
+        if (startDiff !== 0) return startDiff;
+        return toValue(b.endDate) - toValue(a.endDate);
+      }),
+    []
+  );
+
+  const filteredExperiences = useMemo(
+    () =>
+      sortedExperiences.filter(exp =>
+        selectedType === 'All' ? true : exp.type === selectedType
+      ),
+    [selectedType, sortedExperiences]
+  );
+
+  const curvePath = useMemo(
+    () => buildCurvePath(filteredExperiences.length),
+    [filteredExperiences.length]
+  );
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (filterRef.current && !filterRef.current.contains(e.target as Node)) {
+        setIsFilterOpen(false);
+      }
+    };
+
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setIsFilterOpen(false);
+    };
+
+    window.addEventListener('mousedown', handleClickOutside);
+    window.addEventListener('keydown', handleEscape);
+    return () => {
+      window.removeEventListener('mousedown', handleClickOutside);
+      window.removeEventListener('keydown', handleEscape);
+    };
+  }, []);
+
+  const handleSelectType = (value: ExperienceType['type'] | 'All') => {
+    setSelectedType(value);
+    setIsFilterOpen(false);
+  };
+
   return (
-    <section className='w-full bg-primary px-6 py-16'>
+    <section className='w-full bg-lightpeach px-6 py-16'>
       <div className='mx-auto max-w-[1200px]'>
-        <div className='relative mx-auto max-w-[980px]'>
-          {/* PAPER */}
-          <div className='relative overflow-hidden rounded-2xl border border-[#d7cfbf] bg-[#FBF7F0]'>
-            {/* SPIRAL / BINDER AREA */}
-            <div className='relative border-b border-[#e3dacb] bg-[#F5BFA3]/35'>
-              <div className='h-14' />
+        {/* header */}
+        <div className='mx-auto max-w-[980px]'>
+          <div className='flex flex-col items-center gap-4 text-center'>
+            <h2 className='text-3xl font-extrabold tracking-wide text-[#81353B] sm:text-4xl'>
+              My Experience
+            </h2>
 
-              {/* binder holes */}
-              <div className='pointer-events-none absolute inset-0 flex items-center justify-center'>
-                <div className='flex gap-6'>
-                  {Array.from({ length: 7 }).map((_, i) => (
-                    <span
-                      key={i}
-                      className='h-4 w-4 rounded-full border border-[#b7b0a6]/70 bg-[#FBF7F0]'
-                    />
-                  ))}
+            <div ref={filterRef} className='relative w-full max-w-md'>
+              <button
+                type='button'
+                aria-haspopup='listbox'
+                aria-expanded={isFilterOpen}
+                onClick={() => setIsFilterOpen(prev => !prev)}
+                className='flex w-full items-center justify-between  border-2 border-color bg-primary px-6 py-3 text-sm font-semibold text-[#81353B] transition hover:border-[#81353B] focus:outline-none'
+              >
+                <div className='flex items-center gap-3'>
+                  <span className='text-[#81353B]/70'>Filter:</span>
+                  <span className=' bg-[#F5BFA3]/40 px-3 py-1 text-[#81353B]'>
+                    {selectedType}
+                  </span>
                 </div>
-              </div>
+                <svg
+                  aria-hidden='true'
+                  viewBox='0 0 24 24'
+                  className={`h-5 w-5 text-[#81353B] transition-transform duration-200 ${
+                    isFilterOpen ? 'rotate-180' : ''
+                  }`}
+                >
+                  <path
+                    fill='currentColor'
+                    d='M6.3 8.3a1 1 0 0 1 1.4 0L12 12.6l4.3-4.3a1 1 0 1 1 1.4 1.4l-5 5a1 1 0 0 1-1.4 0l-5-5a1 1 0 0 1 0-1.4Z'
+                  />
+                </svg>
+              </button>
+
+              {isFilterOpen && (
+                <div
+                  role='listbox'
+                  aria-label='Filter experiences by type'
+                  className='absolute left-0 right-0 top-full z-20 mt-2 overflow-hidden border-2 border-color bg-[#FBF7F0]'
+                >
+                  {typeOptions.map(option => {
+                    const active = option === selectedType;
+                    return (
+                      <button
+                        key={option}
+                        role='option'
+                        aria-selected={active}
+                        onClick={() =>
+                          handleSelectType(
+                            option as ExperienceType['type'] | 'All'
+                          )
+                        }
+                        className={`flex w-full items-center justify-between border-b border-[#e7dccd]/50 px-6 py-3 text-left text-sm font-semibold transition last:border-b-0 hover:bg-[#F5BFA3]/30 ${
+                          active
+                            ? 'bg-[#F5BFA3]/40 text-[#6b2b31]'
+                            : 'text-[#81353B]'
+                        }`}
+                      >
+                        <span>{option}</span>
+                        {active && (
+                          <svg
+                            aria-hidden='true'
+                            viewBox='0 0 24 24'
+                            className='h-5 w-5 text-[#81353B]'
+                          >
+                            <path
+                              fill='currentColor'
+                              d='M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z'
+                            />
+                          </svg>
+                        )}
+                      </button>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* timeline */}
+          <div className='relative mt-12'>
+            {/* CENTER CURVED LINE (one curve per experience) */}
+            <svg
+              className='pointer-events-none absolute left-1/2 top-0 hidden h-full w-[180px] -translate-x-1/2 md:block'
+              preserveAspectRatio='none'
+              viewBox='0 0 180 100'
+            >
+              {!!curvePath && (
+                <path
+                  d={curvePath}
+                  stroke='#81353B'
+                  strokeWidth='4'
+                  fill='none'
+                  vectorEffect='non-scaling-stroke'
+                  strokeLinecap='round'
+                  opacity='0.7'
+                />
+              )}
+            </svg>
+
+            {/* MOBILE (stacked) */}
+            <div className='space-y-14 md:hidden'>
+              {filteredExperiences.map((exp: ExperienceType, idx: number) => (
+                <div key={exp.id} className='relative'>
+                  <MiniExperienceCard
+                    exp={exp}
+                    onClick={() => setSelectedExp(exp)}
+                    index={idx}
+                  />
+                </div>
+              ))}
             </div>
 
-            {/* left red margin + ruled lines */}
-            <div className='pointer-events-none absolute inset-0'>
-              <div className='absolute left-10 top-0 h-full w-[2px] bg-[#d47a7a]/70' />
-              <div
-                className='absolute inset-0 opacity-[0.55]'
-                style={{
-                  backgroundImage:
-                    'repeating-linear-gradient(to bottom, transparent 0px, transparent 28px, rgba(129,53,59,0.12) 28px, rgba(129,53,59,0.12) 29px)',
-                }}
-              />
-            </div>
+            {/* DESKTOP (place cards on INNER side of each curve, not the "hill" side) */}
+            <div className='hidden md:block'>
+              <div className='space-y-20'>
+                {filteredExperiences.map((exp: ExperienceType, idx: number) => {
+                  // Our curve alternates "hill" left (idx even) then "hill" right (idx odd).
+                  // Inner side is the opposite of the hill side:
+                  // - hill left  => inner right
+                  // - hill right => inner left
+                  const hillLeft = idx % 2 === 0;
+                  const placeLeft = !hillLeft;
 
-            {/* CONTENT */}
-            <div className='relative px-6 py-10 sm:px-10'>
-              <h2 className='text-center text-3xl font-bold tracking-wide text-[#81353B]'>
-                My Experience
-              </h2>
-              <p className='mt-2 text-center text-sm text-[#81353B]/70'>
-                Notes from the field — roles, impact, and tools I used.
-              </p>
-
-              <div className='mt-10 space-y-8'>
-                {experiences.map((exp: ExperienceType) => (
-                  <div
-                    key={exp.id}
-                    className='relative rounded-xl border border-[#e3dacb] bg-white/45 px-5 py-6'
-                  >
-                    {/* paperclip (outline only) */}
-                    <div className='absolute -right-2 -top-3 rotate-[18deg]'>
-                      <div className='h-8 w-6 rounded-[12px] border-2 border-[#b7b0a6]' />
-                      <div className='absolute left-1 top-2 h-6 w-4 rounded-[10px] border-2 border-[#b7b0a6]' />
-                    </div>
-
-                    <div className='flex flex-col gap-4 sm:flex-row sm:items-start sm:gap-5'>
-                      <div className='flex items-start gap-4'>
-                        <div className='rounded-xl border border-[#e3dacb] bg-white px-3 py-3'>
-                          <img
-                            src={exp.image}
-                            alt={exp.company}
-                            className='h-12 w-12 object-contain'
-                          />
-                        </div>
-
-                        <div className='sm:hidden'>
-                          <h3 className='text-lg font-semibold text-[#81353B]'>
-                            {exp.role}
-                          </h3>
-                          <p className='text-sm text-[#81353B]/70'>
-                            {exp.company} • {exp.startDate} – {exp.endDate}
-                          </p>
-                          {exp.location && (
-                            <p className='text-sm text-[#81353B]/60'>
-                              {exp.location}
-                            </p>
-                          )}
-                        </div>
-                      </div>
-
-                      <div className='flex-1'>
-                        <div className='hidden sm:block'>
-                          <h3 className='text-xl font-semibold text-[#81353B]'>
-                            {exp.role}
-                          </h3>
-                          <p className='mt-1 text-sm text-[#81353B]/70'>
-                            {exp.company} • {exp.startDate} – {exp.endDate}
-                          </p>
-                          {exp.location && (
-                            <p className='mt-1 text-sm text-[#81353B]/60'>
-                              {exp.location}
-                            </p>
-                          )}
-                        </div>
-
-                        <div className='mt-4 space-y-2 text-[15px] leading-relaxed text-[#2b2b2b]/80'>
-                          {exp.bullets.map((bullet: string, i: number) => (
-                            <div key={i} className='flex gap-3'>
-                              <span className='mt-[8px] h-[6px] w-[6px] rounded-full bg-[#81353B]/70' />
-                              <p>{bullet}</p>
+                  return (
+                    <div
+                      key={exp.id}
+                      className='grid items-center'
+                      style={{ gridTemplateColumns: '1fr 180px 1fr' }}
+                    >
+                      {/* LEFT COLUMN */}
+                      <div className='flex justify-end'>
+                        {placeLeft ? (
+                          <div className='w-full max-w-[420px] pr-1 relative flex items-center'>
+                            {/* pull toward line (into inner side) */}
+                            <div className='translate-x-6 flex-1 relative z-10'>
+                              <MiniExperienceCard
+                                exp={exp}
+                                onClick={() => setSelectedExp(exp)}
+                                index={idx}
+                              />
                             </div>
-                          ))}
-                        </div>
+                            {/* Horizontal connector line */}
+                            <div
+                              className='absolute right-0 top-1/2 h-0.5 w-[290px] bg-[#81353B]/50'
+                              style={{
+                                transform: 'translateY(-50%) translateX(264px)'
+                              }}
+                            />
+                          </div>
+                        ) : (
+                          <SideImage exp={exp} side='left' />
+                        )}
+                      </div>
 
-                        <div className='mt-5 flex flex-wrap gap-2'>
-                          {exp.tech.map((tech: string, i: number) => (
-                            <span
-                              key={i}
-                              className='rounded-full border border-[#e3dacb] bg-[#F5BFA3]/35 px-3 py-1 text-xs font-medium tracking-wide text-[#81353B]'
-                            >
-                              {tech}
-                            </span>
-                          ))}
-                        </div>
+                      {/* CENTER COLUMN (spacing only; line is absolutely positioned) */}
+                      <div className='relative h-full' />
+
+                      {/* RIGHT COLUMN */}
+                      <div className='flex justify-start'>
+                        {!placeLeft ? (
+                          <div className='w-full max-w-[420px] pl-1 relative flex items-center'>
+                            {/* Horizontal connector line */}
+                            <div
+                              className='absolute left-0 top-1/2 h-0.5 w-[290px] bg-[#81353B]/50'
+                              style={{
+                                transform: 'translateY(-50%) translateX(-264px)'
+                              }}
+                            />
+                            {/* pull toward line (into inner side) */}
+                            <div className='-translate-x-6 flex-1 relative z-10'>
+                              <MiniExperienceCard
+                                exp={exp}
+                                onClick={() => setSelectedExp(exp)}
+                                index={idx}
+                              />
+                            </div>
+                          </div>
+                        ) : (
+                          <SideImage exp={exp} side='right' />
+                        )}
                       </div>
                     </div>
-
-                    {/* torn edge (no shadow) */}
-                    <div className='pointer-events-none absolute inset-x-0 bottom-0 h-3 opacity-60'>
-                      <div
-                        className='h-full w-full'
-                        style={{
-                          backgroundImage:
-                            'repeating-linear-gradient(90deg, rgba(227,218,203,0.0) 0px, rgba(227,218,203,0.0) 10px, rgba(227,218,203,0.55) 10px, rgba(227,218,203,0.55) 12px)',
-                        }}
-                      />
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              <div className='mt-10 flex items-center justify-center gap-2 text-xs text-[#81353B]/60'>
-                <span className='h-[1px] w-16 bg-[#81353B]/20' />
-                <span>End of page</span>
-                <span className='h-[1px] w-16 bg-[#81353B]/20' />
+                  );
+                })}
               </div>
             </div>
           </div>
         </div>
       </div>
+
+      {selectedExp && (
+        <LargeExperienceCard
+          exp={selectedExp}
+          onClose={() => setSelectedExp(null)}
+        />
+      )}
     </section>
   );
 };
