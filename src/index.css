@@ -21,14 +21,27 @@ html {
 
   /* Background */
   .bg-primary {
-    @apply bg-[#FDF9EC]
+    @apply bg-[#FBF7F0] 
+  }
+
+  .bg-secondary {
+    @apply bg-[#f5f0e8] 
   }
 
   .bg-lightpeach {
-    @apply bg-[#FFD1BD]
+    @apply bg-[#f6e5db]
   }
 
   .bg-darkpeach {
-    @apply bg-[#fabc9f]
+    @apply bg-[#F5BFA3]/50
+  }
+
+  /* Border/Ring */
+  .border-color {
+    @apply border-[#81353B]/50
+  }
+  
+  .ring-color {
+    @apply ring-[#81353B]/50
   }
 }
