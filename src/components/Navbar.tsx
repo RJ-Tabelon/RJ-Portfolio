@@ -9,6 +9,8 @@ export default function Navbar() {
   const linkClass: NavLinkProps['className'] = ({ isActive }) =>
     [
       'transition-colors',
+      'text-sm',
+      'lg:text-base',
       isActive ? 'font-semibold' : 'text-hover'
     ].join(' ');
 
@@ -25,7 +27,7 @@ export default function Navbar() {
       <h1 className='lg:text-lg font-bold'>Rainier Joshua (RJ) Tabelon</h1>
 
       {/* Desktop Navigation */}
-      <div className='hidden md:flex gap-6'>
+      <div className='hidden sm:flex gap-6'>
         <NavLink to='/' className={linkClass}>
           Home
         </NavLink>
@@ -39,7 +41,7 @@ export default function Navbar() {
 
       {/* Mobile Hamburger Button */}
       <button
-        className='md:hidden cursor-pointer'
+        className='sm:hidden cursor-pointer'
         onClick={() => setIsMenuOpen(true)}
         aria-label='Open navigation menu'
       >
@@ -48,7 +50,7 @@ export default function Navbar() {
 
       {/* Mobile Drawer */}
       <div
-        className={`md:hidden fixed inset-0 z-50 ${
+        className={`sm:hidden fixed inset-0 z-50 ${
           isMenuOpen ? 'pointer-events-auto' : 'pointer-events-none'
         }`}
         aria-hidden={!isMenuOpen}
