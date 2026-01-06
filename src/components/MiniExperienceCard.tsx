@@ -9,7 +9,7 @@ type Props = {
 
 const MiniExperienceCard = ({ exp, onClick, index = 0 }: Props) => {
   const clickable = Boolean(onClick);
-  const bgColor = index % 2 === 0 ? 'bg-washi' : 'bg-darkpeachwashi';
+  const bgColor = index % 2 === 0 ? 'bg-experiencebrown' : 'bg-experiencepeach';
 
   return (
     <div className='relative'>

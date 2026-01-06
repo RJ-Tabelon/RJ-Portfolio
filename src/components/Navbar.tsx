@@ -23,7 +23,7 @@ export default function Navbar() {
   }, [isMenuOpen]);
 
   return (
-    <nav className='relative flex items-center justify-between px-6 py-4 border-b border-color bg-lightpeachlinen'>
+    <nav className='relative flex items-center justify-between px-6 py-4 border-b border-color bg-navbar'>
       <h1 className='lg:text-lg font-bold'>Rainier Joshua (RJ) Tabelon</h1>
 
       {/* Desktop Navigation */}
@@ -65,7 +65,7 @@ export default function Navbar() {
 
         {/* Panel */}
         <div
-          className={`absolute right-0 top-0 h-full w-72 max-w-[35vw] bg-primary border-l shadow-lg
+          className={`absolute right-0 top-0 h-full w-72 max-w-[35vw] bg-navbarphone border-l shadow-lg
           transition-transform duration-200 ${
             isMenuOpen ? 'translate-x-0' : 'translate-x-full'
           }`}

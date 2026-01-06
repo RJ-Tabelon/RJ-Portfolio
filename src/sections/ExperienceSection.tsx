@@ -139,14 +139,14 @@ const ExperienceSection = () => {
   };
 
   return (
-    <section className='relative w-full bg-lightpeachasfalt px-10 py-16 border-l border-r border-b border-[#d7cfbf] overflow-hidden'>
+    <section className='relative w-full bg-experience px-10 py-16 border-l border-r border-b border-[#d7cfbf] overflow-hidden'>
       <div className='mx-auto max-w-[1200px]'>
         {/* header */}
         <div className='mx-auto max-w-[980px]'>
           <div className='flex flex-col items-center gap-4 text-center'>
-            <h2 className='text-3xl font-extrabold tracking-wide text-[#81353B] sm:text-4xl'>
+            <h1 className='text-3xl sm:text-4xl font-bold text-primary'>
               My Experience
-            </h2>
+            </h1>
 
             <div ref={filterRef} className='relative w-full max-w-md'>
               <button
@@ -258,7 +258,7 @@ const ExperienceSection = () => {
                     <img
                       src={exp.logoShort}
                       alt={exp.company}
-                      className='h-10 w-10 flex-shrink-0 object-contain border border-color'
+                      className='h-10 w-10 flex-shrink-0 object-contain border-2 border-color'
                     />
                   </div>
                   <MiniExperienceCard
