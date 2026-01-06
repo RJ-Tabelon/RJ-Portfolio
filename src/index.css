@@ -65,7 +65,7 @@ html {
 
   .bg-experiencecard {
     background-color: #fbf7f0;
-    background-image: url("https://www.transparenttextures.com/patterns/otis-redding.png");
+    background-image: url('./textures/otis-redding.png');
     }
 
   /* Border/Ring */
