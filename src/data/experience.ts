@@ -1,5 +1,7 @@
-import AKIOAI1 from '@/assets/Experience/akioai1.png';
-import EDUAFRICA from '@/assets/Experience/eduafrica.png';
+import AKIOAI_LONG from '@/assets/Experience/AkioAI/akioai_long.png';
+import AKIOAI_SHORT from '@/assets/Experience/AkioAI/akioai_short.png';
+import EDUAFRICA_LONG from '@/assets/Experience/EDUAfrica/eduafrica_long.png';
+import EDUAFRICA_SHORT from '@/assets/Experience/EDUAfrica/eduafrica_short.png';
 
 export type ExperienceType = {
   id: string;
@@ -9,7 +11,8 @@ export type ExperienceType = {
   startDate: string;
   endDate: string;
   type: 'Internship' | 'Full-time' | 'Contract' | 'Research';
-  image: string;
+  logoLong: string;
+  logoShort: string;
   tech: string[];
   bullets: string[];
 };
@@ -23,7 +26,8 @@ export const experiences: ExperienceType[] = [
     startDate: 'Oct 2025',
     endDate: 'Present',
     type: 'Internship',
-    image: AKIOAI1,
+    logoLong: AKIOAI_LONG,
+    logoShort: AKIOAI_SHORT,
     tech: ['React', 'TypeScript', 'Tailwind CSS', 'Figma', 'Node.js'],
     bullets: [
       'Designed and built therapist and parent dashboards used in live therapy sessions',
@@ -40,7 +44,8 @@ export const experiences: ExperienceType[] = [
     startDate: 'May 2024',
     endDate: 'Jul 2024',
     type: 'Internship',
-    image: EDUAFRICA,
+    logoLong: EDUAFRICA_LONG,
+    logoShort: EDUAFRICA_SHORT,
     tech: ['Python', 'Data Analysis', 'Geospatial Data', 'Research'],
     bullets: [
       'Developed data-driven tools to analyze environmental and community impact datasets',
@@ -57,7 +62,8 @@ export const experiences: ExperienceType[] = [
     startDate: 'Jan 2025',
     endDate: 'Present',
     type: 'Research',
-    image: AKIOAI1,
+    logoShort: AKIOAI_SHORT,
+    logoLong: AKIOAI_LONG,
     tech: [
       'ESP32',
       'Firebase',
@@ -81,7 +87,8 @@ export const experiences: ExperienceType[] = [
     startDate: 'Aug 2024',
     endDate: 'Present',
     type: 'Contract',
-    image: AKIOAI1,
+    logoShort: AKIOAI_SHORT,
+    logoLong: AKIOAI_LONG,
     tech: ['React', 'TypeScript', 'Tailwind CSS', 'Firebase', 'CI/CD'],
     bullets: [
       'Led development of internal tools and public-facing websites for student and alumni engagement',
@@ -98,7 +105,8 @@ export const experiences: ExperienceType[] = [
     startDate: 'Aug 2023',
     endDate: 'Dec 2023',
     type: 'Research',
-    image: AKIOAI1,
+    logoShort: AKIOAI_SHORT,
+    logoLong: AKIOAI_LONG,
     tech: ['Python', 'Machine Learning', 'Data Visualization', 'GIS'],
     bullets: [
       'Developed a wildfire risk analysis platform using real-world environmental data',

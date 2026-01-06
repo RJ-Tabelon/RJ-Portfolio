@@ -38,7 +38,7 @@ html {
 
   /* Textured background */
   .bg-washi {
-    background-image: url('./textures/texture1.png');
+    background-image: url('./textures/washi.png');
     background-size: cover;
     background-repeat: repeat;
     background-color: rgba(228, 211, 172, 0.65);
@@ -46,19 +46,34 @@ html {
   }
 
   .bg-darkpeachwashi {
-    background-image: url('./textures/texture1.png');
+    background-image: url('./textures/washi.png');
     background-size: cover;
     background-repeat: repeat;
     background-color: rgba(245, 191, 163, 0.8);
     background-blend-mode: lighten;
   }
 
+  .bg-lightpeachlinen {
+    background-color: #f6e5db;
+    background-image: url('./textures/linen.png');
+  }
+
+  .bg-lightpeachasfalt {
+    background-color: #f6e5db;
+    background-image: url('./textures/asfalt.png');
+  }
+
+  .bg-experiencecard {
+    background-color: #fbf7f0;
+    background-image: url("https://www.transparenttextures.com/patterns/otis-redding.png");
+    }
+
   /* Border/Ring */
   .border-color {
-    @apply border-[#81353B]/50;
+    @apply border-[#ba888c];
   }
 
   .ring-color {
-    @apply ring-[#81353B]/50;
+    @apply ring-[#ba888c];
   }
 }

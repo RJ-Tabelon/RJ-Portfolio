@@ -1,142 +1,225 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import type { ExperienceType } from '@/data/experience';
+import { Calendar, MapPin, X } from 'lucide-react';
 
 type Props = {
   exp: ExperienceType;
   onClose?: () => void;
 };
 
-const LargeExperienceCard = ({ exp, onClose }: Props) => {
-  useEffect(() => {
-    if (!onClose) return undefined;
-    const handler = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose();
-    };
-    window.addEventListener('keydown', handler);
-    return () => window.removeEventListener('keydown', handler);
-  }, [onClose]);
+function cx(...classes: Array<string | false | undefined | null>) {
+  return classes.filter(Boolean).join(' ');
+}
 
-  const cardContent = (
-    <article className='group relative overflow-hidden rounded-2xl border border-[#e7dccd] bg-[#FBF7F0]'>
-      <div className='h-2 w-full bg-[#F5BFA3]' />
+const Section = ({
+  title,
+  children,
+  className
+}: {
+  title: string;
+  children: React.ReactNode;
+  className?: string;
+}) => {
+  return (
+    <section className={cx('mt-5', className)}>
+      <h4 className='text-xs sm:text-sm font-semibold tracking-wider text-[#81353B]/80 uppercase'>
+        {title}
+      </h4>
+      <div className='mt-2'>{children}</div>
+    </section>
+  );
+};
 
-      <div className='relative p-6 sm:p-7'>
-        <div className='pointer-events-none absolute -right-10 top-6 h-28 w-28 rotate-[12deg] rounded-2xl border border-[#81353B]/15 bg-white/30' />
-        <div
-          className='pointer-events-none absolute inset-0 opacity-[0.35]'
-          style={{
-            backgroundImage:
-              'radial-gradient(rgba(129,53,59,0.10) 1px, transparent 1px)',
-            backgroundSize: '14px 14px'
-          }}
-        />
+const TechPills = ({ tech }: { tech: string[] }) => {
+  return (
+    <div className='flex flex-wrap gap-2'>
+      {tech.map(t => (
+        <span
+          key={t}
+          className='border border-color bg-white/70 px-3 py-1 text-[10px] sm:text-xs font-semibold text-[#81353B]'
+        >
+          {t}
+        </span>
+      ))}
+    </div>
+  );
+};
 
-        <div className='relative flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between'>
-          <div className='flex items-start gap-4'>
-            <div className='relative'>
-              <div className='rotate-[-2deg] rounded-xl border border-[#e7dccd] bg-white p-3'>
-                <img
-                  src={exp.image}
-                  alt={exp.company}
-                  className='h-12 w-12 object-contain'
-                />
-              </div>
+const BulletList = ({ bullets }: { bullets: string[] }) => {
+  return (
+    <ul className='space-y-1 sm:space-y-2 text-xs sm:text-sm leading-relaxed text-gray-700'>
+      {bullets.map((b, i) => (
+        <li key={i} className='flex gap-3'>
+          <span className='mt-[8px] h-[6px] w-[6px] shrink-0 rounded-full bg-[#81353B]' />
+          <span>{b}</span>
+        </li>
+      ))}
+    </ul>
+  );
+};
 
-              <div className='pointer-events-none absolute -left-2 -top-2 h-5 w-10 rotate-[-18deg] rounded-md border border-[#d8cbbb] bg-white/50' />
-            </div>
+const ExperienceContent = ({ exp }: { exp: ExperienceType }) => {
+  return (
+    <article className='relative'>
+      <div className='p-6 sm:p-08'>
+        {/* MOBILE VERSION (below sm) */}
+        <div className='flex flex-col items-start gap-3 sm:hidden'>
+          {/* TOP: LOGO */}
+          <div className='w-full h-full flex justify-center border border-color bg-white'>
+            <img
+              src={exp.logoLong}
+              alt={exp.company}
+              className='object-contain opacity-90  '
+              loading='lazy'
+            />
+          </div>
 
-            <div>
-              <h3 className='text-lg font-bold tracking-wide text-[#81353B] sm:text-xl'>
-                {exp.role}
-              </h3>
-              <p className='mt-1 text-sm text-[#81353B]/70'>
-                <span className='font-medium text-[#81353B]'>
-                  {exp.company}
-                </span>
-                <span className='mx-2 text-[#81353B]/35'>•</span>
-                <span>
-                  {exp.startDate} – {exp.endDate}
-                </span>
-              </p>
+          {/* BELOW: TEXT COLUMN */}
+          <div className='flex flex-col gap-1   '>
+            {/* ROLE */}
+            <h3 className='text-md font-extrabold leading-tight tracking-wide text-[#81353B]'>
+              {exp.role}
+            </h3>
+
+            {/* COMPANY + TYPE */}
+            <p className='text-sm font-semibold text-[#81353B]/80'>
+              {exp.company}
+              <span className='mx-2 text-[#81353B]/30'>•</span>
+              <span className='font-medium'>{exp.type}</span>
+            </p>
+
+            {/* DATE + LOCATION */}
+            <div className='text-xs flex flex-col gap-1 text-[#81353B]/70'>
+              <span className='flex items-center gap-2'>
+                <Calendar className='h-3.5 w-3.5' />
+                {exp.startDate} – {exp.endDate}
+              </span>
 
               {exp.location && (
-                <p className='mt-1 text-sm text-[#81353B]/60'>{exp.location}</p>
+                <span className='flex items-center gap-2'>
+                  <MapPin className='h-3.5 w-3.5' />
+                  {exp.location}
+                </span>
               )}
             </div>
           </div>
+        </div>
 
-          <div className='sm:text-right'>
-            <div className='inline-flex items-center gap-2 rounded-full border border-[#e7dccd] bg-white/60 px-4 py-2 text-xs font-semibold tracking-wide text-[#81353B]'>
-              <span className='h-2 w-2 rounded-full bg-[#81353B]/55' />
-              Experience
+        {/* DESKTOP VERSION (sm and above) */}
+        <div className='hidden sm:flex items-center gap-5'>
+          {/* LEFT: LOGO */}
+          <div className='h-23 shrink-0 border border-color bg-white'>
+            <img
+              src={exp.logoShort}
+              alt={exp.company}
+              className='h-full object-contain'
+              loading='lazy'
+            />
+          </div>
+
+          {/* RIGHT: TEXT COLUMN */}
+          <div className='flex flex-col gap-1'>
+            {/* ROLE */}
+            <h3 className='text-lg font-extrabold leading-tight tracking-wide text-[#81353B]'>
+              {exp.role}
+            </h3>
+
+            {/* COMPANY + TYPE */}
+            <p className='text-md font-semibold text-[#81353B]/80'>
+              {exp.company}
+              <span className='mx-2 text-[#81353B]/30'>•</span>
+              <span className='font-medium'>{exp.type}</span>
+            </p>
+
+            {/* DATE + LOCATION */}
+            <div className='text-sm flex flex-col gap-1 text-[#81353B]/70'>
+              <span className='flex items-center gap-2'>
+                <Calendar className='h-3.5 w-3.5' />
+                {exp.startDate} – {exp.endDate}
+              </span>
+
+              {exp.location && (
+                <span className='flex items-center gap-2'>
+                  <MapPin className='h-3.5 w-3.5' />
+                  {exp.location}
+                </span>
+              )}
             </div>
           </div>
         </div>
 
-        <div className='relative mt-6 space-y-3 text-[15px] leading-relaxed text-[#2b2b2b]/80'>
-          {exp.bullets.map((bullet: string, i: number) => (
-            <div key={i} className='flex gap-3'>
-              <span className='mt-[8px] h-[7px] w-[7px] shrink-0 rounded-full bg-[#81353B]/65' />
-              <p>{bullet}</p>
-            </div>
-          ))}
-        </div>
+        <Section title='Highlights'>
+          <BulletList bullets={exp.bullets} />
+        </Section>
 
-        <div className='relative mt-6 flex flex-wrap gap-2'>
-          {exp.tech.map((tech: string, i: number) => (
-            <span
-              key={i}
-              className='rounded-full border border-[#e7dccd] bg-[#F5BFA3]/35 px-3 py-1 text-xs font-semibold tracking-wide text-[#81353B]'
-            >
-              {tech}
-            </span>
-          ))}
-        </div>
-
-        <div className='pointer-events-none relative mt-7 h-3 opacity-70'>
-          <div
-            className='h-full w-full'
-            style={{
-              backgroundImage:
-                'repeating-linear-gradient(90deg, rgba(227,218,203,0.0) 0px, rgba(227,218,203,0.0) 11px, rgba(227,218,203,0.8) 11px, rgba(227,218,203,0.8) 13px)'
-            }}
-          />
-        </div>
+        {exp.tech?.length ? (
+          <Section title='Technologies Used'>
+            <TechPills tech={exp.tech} />
+          </Section>
+        ) : null}
       </div>
     </article>
   );
+};
 
-  if (!onClose) return cardContent;
+const ModalShell = ({
+  onClose,
+  children
+}: {
+  onClose: () => void;
+  children: React.ReactNode;
+}) => {
+  const dialogRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+    };
+    window.addEventListener('keydown', onKeyDown);
+
+    requestAnimationFrame(() => dialogRef.current?.focus());
+
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, [onClose]);
 
   return (
     <div
-      className='fixed inset-0 z-50 flex items-start justify-center overflow-y-auto bg-black/45 p-4 sm:p-6'
-      onClick={onClose}
-      role='dialog'
-      aria-modal='true'
+      className='fixed inset-0 z-50 bg-black/50 p-[2vh] sm:py-[10vh] sm:px-6'
+      onMouseDown={onClose}
+      role='presentation'
     >
       <div
-        className='relative mt-10 w-full max-w-3xl overflow-hidden rounded-2xl border border-[#e7dccd] bg-[#FBF7F0] shadow-2xl shadow-[#81353B]/20'
-        onClick={e => e.stopPropagation()}
+        ref={dialogRef}
+        role='dialog'
+        aria-modal='true'
+        tabIndex={-1}
+        onMouseDown={e => e.stopPropagation()}
+        className='relative mx-auto w-full max-w-3xl overflow-hidden  bg-[#FBF7F0] outline-none'
       >
-        <div className='flex items-center justify-end bg-white/70 px-4 py-3 backdrop-blur-sm'>
-          <button
-            type='button'
-            aria-label='Close experience details'
-            onClick={onClose}
-            className='flex items-center gap-2 rounded-full bg-[#81353B] px-3 py-1 text-sm font-semibold text-white shadow-sm transition hover:bg-[#6b2b31] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#81353B] focus:ring-offset-white'
-          >
-            <span className='text-base leading-none' aria-hidden='true'>
-              ×
-            </span>
-            Close
-          </button>
-        </div>
+        <button
+          onClick={onClose}
+          aria-label='Close'
+          className='absolute right-3.5 top-3.5 sm:right-5 sm:top-5 z-10 text-[#81353B] transition-transform hover:bg-[#f6e5db] bg-white border border-color'
+        >
+          <X className='h-6 w-6' />
+        </button>
 
-        {cardContent}
+        <div className='max-h-[80vh] overflow-y-auto'>{children}</div>
       </div>
     </div>
   );
+};
+
+const LargeExperienceCard = ({ exp, onClose }: Props) => {
+  const body = (
+    <div className='border border-color bg-experiencecard'>
+      <ExperienceContent exp={exp} />
+    </div>
+  );
+
+  if (!onClose) return body;
+
+  return <ModalShell onClose={onClose}>{body}</ModalShell>;
 };
 
 export default LargeExperienceCard;

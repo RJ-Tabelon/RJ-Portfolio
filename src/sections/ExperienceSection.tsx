@@ -58,19 +58,19 @@ const SideImage = ({
   exp: ExperienceType;
   side: 'left' | 'right';
 }) => {
-  const pushTowardLine = side === 'left' ? '-translate-x-20' : 'translate-x-20';
+  const pushTowardLine = side === 'left' ? 'translate-x-0' : '-translate-x-0';
   const pad = side === 'left' ? 'pr-1 justify-end' : 'pl-1 justify-start';
 
   return (
     <div className={`w-full max-w-[360px] ${pad} relative flex items-center`}>
       <div
-        className={`${pushTowardLine} relative inline-flex items-center justify-center border border-color bg-white z-10 opacity-85`}
+        className={`${pushTowardLine} relative inline-flex items-center justify-center border-2 border-color bg-white z-10 opacity-85`}
       >
         <img
-          src={exp.image}
+          src={exp.logoLong}
           alt={exp.company}
           loading='lazy'
-          className='max-h-16 w-auto  object-cover'
+          className='max-h-16 w-auto object-cover'
         />
         <div className='pointer-events-none absolute inset-0 mix-blend-overlay' />
       </div>
@@ -139,7 +139,7 @@ const ExperienceSection = () => {
   };
 
   return (
-    <section className='w-full bg-lightpeach px-6 py-16'>
+    <section className='relative w-full bg-lightpeachasfalt px-10 py-16 border-l border-r border-b border-[#d7cfbf] overflow-hidden'>
       <div className='mx-auto max-w-[1200px]'>
         {/* header */}
         <div className='mx-auto max-w-[980px]'>
@@ -222,7 +222,7 @@ const ExperienceSection = () => {
           </div>
 
           {/* timeline */}
-          <div className='relative mt-12'>
+          <div className='relative mt-12 pl-3 sm:pl-13 sm:pr-10 md:pl-5 md:pr-5'>
             {/* CENTER CURVED LINE (one curve per experience) */}
             <svg
               className='pointer-events-none absolute left-1/2 top-0 hidden h-full w-[180px] -translate-x-1/2 md:block'
@@ -232,20 +232,35 @@ const ExperienceSection = () => {
               {!!curvePath && (
                 <path
                   d={curvePath}
-                  stroke='#81353B'
+                  stroke='#ba888c'
                   strokeWidth='4'
                   fill='none'
                   vectorEffect='non-scaling-stroke'
                   strokeLinecap='round'
-                  opacity='0.7'
                 />
               )}
             </svg>
 
             {/* MOBILE (stacked) */}
-            <div className='space-y-14 md:hidden'>
+            <div className='relative space-y-5 pl-12 md:hidden'>
+              <div
+                aria-hidden='true'
+                className='absolute left-0 top-0 -bottom-5 w-[3px] bg-[#ba888c]'
+              />
+
               {filteredExperiences.map((exp: ExperienceType, idx: number) => (
                 <div key={exp.id} className='relative'>
+                  <span
+                    aria-hidden='true'
+                    className='absolute -left-[45px] h-0.5 w-[45px] translate-y-19 bg-[#ba888c]'
+                  />
+                  <div className='absolute -left-[66px] top-[55px] h-0.5 w-[45px]'>
+                    <img
+                      src={exp.logoShort}
+                      alt={exp.company}
+                      className='h-10 w-10 flex-shrink-0 object-contain border border-color'
+                    />
+                  </div>
                   <MiniExperienceCard
                     exp={exp}
                     onClick={() => setSelectedExp(exp)}
@@ -286,9 +301,9 @@ const ExperienceSection = () => {
                             </div>
                             {/* Horizontal connector line */}
                             <div
-                              className='absolute right-0 top-1/2 h-0.5 w-[290px] bg-[#81353B]/50'
+                              className='absolute right-0 top-1/2 h-0.5 w-[165px] bg-[#ba888c]'
                               style={{
-                                transform: 'translateY(-50%) translateX(264px)'
+                                transform: 'translateY(-50%) translateX(185px)'
                               }}
                             />
                           </div>
@@ -306,9 +321,9 @@ const ExperienceSection = () => {
                           <div className='w-full max-w-[420px] pl-1 relative flex items-center'>
                             {/* Horizontal connector line */}
                             <div
-                              className='absolute left-0 top-1/2 h-0.5 w-[290px] bg-[#81353B]/50'
+                              className='absolute left-0 top-1/2 h-0.5 w-[165px] bg-[#ba888c]'
                               style={{
-                                transform: 'translateY(-50%) translateX(-264px)'
+                                transform: 'translateY(-50%) translateX(-185px)'
                               }}
                             />
                             {/* pull toward line (into inner side) */}
