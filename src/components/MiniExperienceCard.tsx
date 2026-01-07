@@ -50,59 +50,53 @@ const MiniExperienceCard = ({ exp, onClick, index = 0 }: Props) => {
             }}
           />
 
-          
-
           {/* MOBILE VERSION (below md) */}
           <div className='relative flex md:hidden'>
-            <div className='flex items-stretch gap-4'>
-              {/* LEFT COLUMN: Logo */}
-              
+            {/* RIGHT COLUMN: Everything else */}
+            <div className='flex flex-col gap-1.5'>
+              {/* ROLE */}
+              <h3 className='text-sm sm:text-md font-bold leading-tight tracking-wide text-[#81353B]'>
+                {exp.role}
+              </h3>
 
-              {/* RIGHT COLUMN: Everything else */}
-              <div className='flex flex-col gap-1'>
-                {/* ROLE */}
-                <h3 className='text-sm sm:text-md font-extrabold leading-tight tracking-wide text-[#81353B]'>
-                  {exp.role}
-                </h3>
+              {/* COMPANY + TYPE */}
+              <p className='text-xs sm:text-sm font-semibold text-[#81353B]/80'>
+                {exp.company}
+                <span className='mx-2 text-[#81353B]/30'>•</span>
+                <span className='font-medium'>{exp.type}</span>
+              </p>
 
-                {/* COMPANY + TYPE */}
-                <p className='text-xs sm:text-sm font-semibold text-[#81353B]/80'>
-                  {exp.company}
-                  <span className='mx-2 text-[#81353B]/30'>•</span>
-                  <span className='font-medium'>{exp.type}</span>
-                </p>
-
-                {/* DATE */}
-                <div className='text-[10px] sm:text-xs flex items-center gap-2 text-xs text-[#81353B]/70'>
-                  <Calendar className='h-3.5 w-3.5' />
-                  <span>
-                    {exp.startDate} – {exp.endDate}
-                  </span>
-                </div>
-
-                {/* LOCATION */}
-                {exp.location && (
-                  <div className='text-[10px] sm:text-xs flex items-center gap-2 text-xs text-[#81353B]/65'>
-                    <MapPin className='h-3.5 w-3.5' />
-                    <span>{exp.location}</span>
-                  </div>
-                )}
-
-                {/* CTA */}
-                {clickable && (
-                  <div className='text-[10px] sm:text-xs inline-flex items-center gap-1 pt-0 font-semibold text-[#81353B]'>
-                    <span>View more</span>
-                    <ArrowUpRight className='h-4 w-4 transition-transform group-hover:translate-x-[1px] group-hover:-translate-y-[1px]' />
-                  </div>
-                )}
+              {/* DATE */}
+              <div className='text-[10px] sm:text-xs flex items-center gap-2 text-xs text-[#81353B]/70'>
+                <Calendar className='h-3.5 w-3.5' />
+                <span>
+                  {exp.startDate} – {exp.endDate}
+                </span>
               </div>
+
+              {/* LOCATION */}
+              {exp.location && (
+                <div className='text-[10px] sm:text-xs flex items-center gap-2 text-xs text-[#81353B]/65'>
+                  <MapPin className='h-3.5 w-3.5' />
+                  <span>{exp.location}</span>
+                </div>
+              )}
+
+              {clickable && (
+                <div>
+                  <div className='text-[10px] sm:text-xs view-more border-b'>
+                    <span>View more</span>
+                    <ArrowUpRight className='h-4 w-4' />
+                  </div>
+                </div>
+              )}
             </div>
           </div>
 
           {/* DESKTOP VERSION (md and above) */}
           <div className='relative hidden flex-col gap-2 md:flex'>
             {/* ROLE */}
-            <h3 className='text-lg font-extrabold leading-tight tracking-wide text-[#81353B]'>
+            <h3 className='text-lg font-bold leading-tight tracking-wide text-[#81353B]'>
               {exp.role}
             </h3>
 
@@ -131,9 +125,11 @@ const MiniExperienceCard = ({ exp, onClick, index = 0 }: Props) => {
 
             {/* CTA */}
             {clickable && (
-              <div className='mt-1 inline-flex items-center gap-1 font-semibold text-[#81353B] text-sm'>
-                <span>View more</span>
-                <ArrowUpRight className='h-4 w-4 transition-transform group-hover:translate-x-[1px] group-hover:-translate-y-[1px]' />
+              <div>
+                <div className='text-sm view-more border-b-2'>
+                  <span>View more</span>
+                  <ArrowUpRight className='h-4 w-4' />
+                </div>
               </div>
             )}
           </div>

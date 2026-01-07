@@ -154,18 +154,18 @@ const ExperienceSection = () => {
                 aria-haspopup='listbox'
                 aria-expanded={isFilterOpen}
                 onClick={() => setIsFilterOpen(prev => !prev)}
-                className='flex w-full items-center justify-between  border-2 border-color bg-primary px-6 py-3 text-sm font-semibold text-[#81353B] transition hover:border-[#81353B] focus:outline-none'
+                className='flex w-full items-center justify-between  border-2 border-color bg-primary px-6 py-3 text-sm font-semibold text-[#81353B] transition hover:border-[#81353B]/75 focus:outline-none'
               >
                 <div className='flex items-center gap-3'>
                   <span className='text-[#81353B]/70'>Filter:</span>
-                  <span className=' bg-[#F5BFA3]/40 px-3 py-1 text-[#81353B]'>
+                  <span className=' bg-[#F5BFA3]/60 px-3 py-1 text-[#81353B]'>
                     {selectedType}
                   </span>
                 </div>
                 <svg
                   aria-hidden='true'
                   viewBox='0 0 24 24'
-                  className={`h-5 w-5 text-[#81353B] transition-transform duration-200 ${
+                  className={`h-5 w-5 text-[#81353B]/70 transition-transform duration-200 ${
                     isFilterOpen ? 'rotate-180' : ''
                   }`}
                 >
@@ -194,9 +194,9 @@ const ExperienceSection = () => {
                             option as ExperienceType['type'] | 'All'
                           )
                         }
-                        className={`flex w-full items-center justify-between border-b border-[#e7dccd]/50 px-6 py-3 text-left text-sm font-semibold transition last:border-b-0 hover:bg-[#F5BFA3]/30 ${
+                        className={`flex w-full items-center justify-between border-b border-[#e7dccd]/50 px-6 py-3 text-left text-sm font-semibold transition last:border-b-0 hover:bg-[#F5BFA3]/50 ${
                           active
-                            ? 'bg-[#F5BFA3]/40 text-[#6b2b31]'
+                            ? 'bg-[#F5BFA3]/30 text-[#6b2b31]'
                             : 'text-[#81353B]'
                         }`}
                       >
@@ -205,7 +205,7 @@ const ExperienceSection = () => {
                           <svg
                             aria-hidden='true'
                             viewBox='0 0 24 24'
-                            className='h-5 w-5 text-[#81353B]'
+                            className='h-5 w-5 text-[#81353B]/70'
                           >
                             <path
                               fill='currentColor'
@@ -254,11 +254,11 @@ const ExperienceSection = () => {
                     aria-hidden='true'
                     className='absolute -left-[45px] h-0.5 w-[45px] translate-y-19 bg-[#ba888c]'
                   />
-                  <div className='absolute -left-[66px] top-[55px] h-0.5 w-[45px]'>
+                  <div className='absolute -left-[68px] top-[54px] h-0.5 w-[45px]'>
                     <img
                       src={exp.logoShort}
                       alt={exp.company}
-                      className='h-10 w-10 flex-shrink-0 object-contain border-2 border-color'
+                      className='h-11 w-11 flex-shrink-0 object-contain border-2 border-color'
                     />
                   </div>
                   <MiniExperienceCard

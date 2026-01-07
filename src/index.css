@@ -37,7 +37,7 @@ html {
   }
 
   /* Navbar */
-.bg-navbar {
+  .bg-navbar {
     background-color: #f6e5db;
     background-image: url('./textures/dark-tire.png');
   }
@@ -54,8 +54,8 @@ html {
   }
 
   .bg-polaroid {
-    background-color: #FBF7F0;
-    background-image: url("./textures/little-pluses.png");
+    background-color: #fbf7f0;
+    background-image: url('./textures/little-pluses.png');
   }
 
   /* Experience */
@@ -75,14 +75,14 @@ html {
   }
 
   .bg-experiencecard {
-    background-color: #fbf7f0;
-    background-image: url('./textures/rice-paper-2.png');
+    background-color: #fef9ee;
+    background-image: url("./textures/notebook-dark.png");
   }
 
   /* Project */
   .bg-project {
-    background-color: #c9b591;
-    background-image: url("https://www.transparenttextures.com/patterns/tex2res5.png");
+    background-color: #c7b698;
+    background-image: url('./textures/tex2res5.png');
   }
 
   /* Border/Ring */
@@ -92,5 +92,19 @@ html {
 
   .ring-color {
     @apply ring-[#ba888c];
+  }
+
+  /* Other */
+  .tech-chip {
+    @apply bg-[#F5BFA3]/60 px-3 py-1 text-[10px] sm:text-xs font-medium 
+  }
+
+  .view-more {
+    @apply text-xs md:text-sm text-[#81353B] border-b-2 border-transparent hover:border-[#81353B];
+    @apply font-medium inline-flex items-center gap-1;
+  }
+
+  .x-button {
+    @apply bg-white/80 hover:bg-[#fcefe7]
   }
 }

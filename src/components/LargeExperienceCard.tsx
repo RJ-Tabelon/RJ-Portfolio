@@ -36,7 +36,7 @@ const TechPills = ({ tech }: { tech: string[] }) => {
       {tech.map(t => (
         <span
           key={t}
-          className='border border-color bg-white/70 px-3 py-1 text-[10px] sm:text-xs font-semibold text-[#81353B]'
+          className='border border-color bg-[#F5BFA3]/40 px-3 py-1 text-[10px] sm:text-xs font-semibold text-[#81353B]'
         >
           {t}
         </span>
@@ -77,7 +77,7 @@ const ExperienceContent = ({ exp }: { exp: ExperienceType }) => {
           {/* BELOW: TEXT COLUMN */}
           <div className='flex flex-col gap-1   '>
             {/* ROLE */}
-            <h3 className='text-md font-extrabold leading-tight tracking-wide text-[#81353B]'>
+            <h3 className='text-md font-bold leading-tight tracking-wide text-[#81353B]'>
               {exp.role}
             </h3>
 
@@ -120,7 +120,7 @@ const ExperienceContent = ({ exp }: { exp: ExperienceType }) => {
           {/* RIGHT: TEXT COLUMN */}
           <div className='flex flex-col gap-1'>
             {/* ROLE */}
-            <h3 className='text-lg font-extrabold leading-tight tracking-wide text-[#81353B]'>
+            <h3 className='text-lg font-bold leading-tight tracking-wide text-[#81353B]'>
               {exp.role}
             </h3>
 
@@ -199,12 +199,12 @@ const ModalShell = ({
         <button
           onClick={onClose}
           aria-label='Close'
-          className='absolute right-3.5 top-3.5 sm:right-5 sm:top-5 z-10 text-[#81353B] transition-transform hover:bg-[#f6e5db] bg-white border border-color'
+          className='absolute right-3.5 top-3.5 sm:right-5 sm:top-5 z-10 text-[#81353B] transition-transform x-button border border-color'
         >
           <X className='h-6 w-6' />
         </button>
 
-        <div className='max-h-[80vh] overflow-y-auto'>{children}</div>
+        <div className='max-h-[96vh] overflow-y-auto'>{children}</div>
       </div>
     </div>
   );

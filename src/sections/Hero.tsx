@@ -113,7 +113,7 @@ const Hero = () => {
                 Rainier Joshua (RJ) Tabelon
               </h1>
 
-              <div className='relative mt-2 bg-herocard py-6 pl-6 pr-24 ring-1 ring-color'>
+              <div className='relative mt-2 bg-herocard py-6 pl-6 pr-24 ring-1 ring-color '>
                 <div className='relative max-w-[58rem] space-y-5 text-xs md:text-sm lg:text-md leading-tight text-primary'>
                   <p>
                     Hey there! I&apos;m RJ, a Computer Science major and
@@ -179,7 +179,7 @@ const Hero = () => {
                   alt='Washi tape'
                   className='h-28 w-auto pointer-events-none absolute -right-17 z-20 w-[280px] rotate-[50deg] select-none'
                 />
-                <div className='relative bg-polaroid p-3 pb-6 rotate-[10deg] ring-1 ring-color'>
+                <div className='relative bg-polaroid p-3 pb-6 rotate-[10deg] ring-1 ring-color '>
                   <img
                     src={Headshot}
                     alt='RJ Tabelon Headshot'
