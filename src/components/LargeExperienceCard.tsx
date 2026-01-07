@@ -36,7 +36,7 @@ const TechPills = ({ tech }: { tech: string[] }) => {
       {tech.map(t => (
         <span
           key={t}
-          className='border border-color bg-[#F5BFA3]/40 px-3 py-1 text-[10px] sm:text-xs font-semibold text-[#81353B]'
+          className=' bg-[#F5BFA3]/40 px-3 py-1 text-[10px] sm:text-xs font-semibold text-[#81353B]'
         >
           {t}
         </span>

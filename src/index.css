@@ -75,14 +75,20 @@ html {
   }
 
   .bg-experiencecard {
-    background-color: #fef9ee;
-    background-image: url("./textures/notebook-dark.png");
+    background-color: #fbf7f0;
+    background-image: url('./textures/notebook-dark.png');
   }
 
   /* Project */
   .bg-project {
     background-color: #c7b698;
     background-image: url('./textures/tex2res5.png');
+  }
+
+  /* Resume */
+  .bg-resume {
+    background-color: #f9dbca;
+    background-image: url("https://www.transparenttextures.com/patterns/rough-cloth-light.png");
   }
 
   /* Border/Ring */
@@ -96,7 +102,7 @@ html {
 
   /* Other */
   .tech-chip {
-    @apply bg-[#F5BFA3]/60 px-3 py-1 text-[10px] sm:text-xs font-medium 
+    @apply bg-[#F5BFA3]/60 px-3 py-1 text-[10px] sm:text-xs font-medium;
   }
 
   .view-more {
@@ -105,6 +111,6 @@ html {
   }
 
   .x-button {
-    @apply bg-white/80 hover:bg-[#fcefe7]
+    @apply bg-white/80 hover:bg-[#fcefe7];
   }
 }

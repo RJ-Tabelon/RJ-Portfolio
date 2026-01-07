@@ -108,7 +108,7 @@ const Projects = () => {
   const hasActiveFilters = searchQuery || selectedTech.length > 0;
 
   return (
-    <div className='min-h-screen bg-project py-12 px-10 sm:px-12 border-x border-b border-color'>
+    <div className='min-h-screen bg-project py-10 px-10 sm:px-12 border-x border-b border-color'>
       {/* Header */}
       <div className='max-w-6xl mx-auto mb-12'>
         <div className='text-center mb-4'>
