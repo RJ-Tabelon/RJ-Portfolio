@@ -76,7 +76,7 @@ const ModalShell = ({
 
   return (
     <div
-      className='fixed inset-0 z-50 bg-black/50 p-[2vh] sm:py-[10vh] sm:px-6'
+      className='fixed inset-0 z-50 bg-black/50 py-[2vh] px-6 sm:py-[5vh]'
       onMouseDown={onClose}
     >
       <div
@@ -94,7 +94,7 @@ const ModalShell = ({
           <X className='h-6 w-6' />
         </button>
 
-        <div className='max-h-[96vh] sm:max-h-[80vh] overflow-y-auto'>
+        <div className='max-h-[96vh] sm:max-h-[90vh] overflow-y-auto'>
           {children}
         </div>
       </div>
@@ -122,11 +122,11 @@ const ProjectContent = ({ project }: { project: ProjectType }) => {
 
   return (
     <article className='relative p-6 sm:p-8'>
-      <h3 className='text-lg sm:text-xl font-bold tracking-wide text-[#81353B]'>
+      <h3 className='text-lg sm:text-xl font-semibold tracking-wide text-[#81353B]'>
         {project.name}
       </h3>
 
-      <p className='mt-1 text-sm sm:text-base text-[#81353B]/80'>
+      <p className='mt-1 text-sm sm:text-base text-gray-700'>
         {project.description}
       </p>
 
@@ -180,7 +180,7 @@ const ProjectContent = ({ project }: { project: ProjectType }) => {
       )}
 
       {images.length > 0 && (
-        <Section title='Screenshots'>
+        <Section title='Images'>
           <div className='relative'>
             <img
               src={images[index]}

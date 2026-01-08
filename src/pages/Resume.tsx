@@ -39,7 +39,7 @@ const Resume = () => {
           <Page
             pageNumber={1}
             width={containerWidth}
-            renderTextLayer={false}
+            renderTextLayer={true}
             renderAnnotationLayer={false}
             className='border border-color'
           />

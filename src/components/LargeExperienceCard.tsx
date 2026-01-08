@@ -1,6 +1,6 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState, useCallback } from 'react';
 import type { ExperienceType } from '@/data/experience';
-import { Calendar, MapPin, X } from 'lucide-react';
+import { Calendar, MapPin, X, ChevronLeft, ChevronRight } from 'lucide-react';
 
 type Props = {
   exp: ExperienceType;
@@ -59,9 +59,21 @@ const BulletList = ({ bullets }: { bullets: string[] }) => {
 };
 
 const ExperienceContent = ({ exp }: { exp: ExperienceType }) => {
+  const images = Array.isArray(exp.images) ? exp.images : [];
+  const [index, setIndex] = useState(0);
+
+  const next = useCallback(
+    () => setIndex(i => (i + 1) % images.length),
+    [images.length]
+  );
+  const prev = useCallback(
+    () => setIndex(i => (i - 1 + images.length) % images.length),
+    [images.length]
+  );
+
   return (
     <article className='relative'>
-      <div className='p-6 sm:p-08'>
+      <div className='p-6 sm:p-8'>
         {/* MOBILE VERSION (below sm) */}
         <div className='flex flex-col items-start gap-3 sm:hidden'>
           {/* TOP: LOGO */}
@@ -157,6 +169,38 @@ const ExperienceContent = ({ exp }: { exp: ExperienceType }) => {
             <TechPills tech={exp.tech} />
           </Section>
         ) : null}
+
+        {images.length > 0 && (
+          <Section title='Images'>
+            <div className='relative'>
+              <img
+                src={images[index]}
+                alt={`${exp.company} screenshot ${index + 1}`}
+                className='w-full object-contain border border-color'
+                loading='lazy'
+              />
+
+              {images.length > 1 && (
+                <div className='mt-3 flex items-center justify-center gap-3'>
+                  <button
+                    onClick={prev}
+                    className='carousel-button inline-flex items-center justify-center border border-color bg-white/80 px-2 py-1 text-[#81353B] hover:bg-[#fcefe7]'
+                    aria-label='Previous screenshot'
+                  >
+                    <ChevronLeft className='h-5 w-5' aria-hidden='true' />
+                  </button>
+                  <button
+                    onClick={next}
+                    className='carousel-button inline-flex items-center justify-center border border-color bg-white/80 px-2 py-1 text-[#81353B] hover:bg-[#fcefe7]'
+                    aria-label='Next screenshot'
+                  >
+                    <ChevronRight className='h-5 w-5' aria-hidden='true' />
+                  </button>
+                </div>
+              )}
+            </div>
+          </Section>
+        )}
       </div>
     </article>
   );
@@ -184,7 +228,7 @@ const ModalShell = ({
 
   return (
     <div
-      className='fixed inset-0 z-50 bg-black/50 p-[2vh] sm:py-[10vh] sm:px-6'
+      className='fixed inset-0 z-50 bg-black/50 py-[2vh] px-6 sm:py-[5vh]'
       onMouseDown={onClose}
       role='presentation'
     >
@@ -194,7 +238,7 @@ const ModalShell = ({
         aria-modal='true'
         tabIndex={-1}
         onMouseDown={e => e.stopPropagation()}
-        className='relative mx-auto w-full max-w-3xl overflow-hidden  bg-[#FBF7F0] outline-none'
+        className='relative mx-auto w-full max-w-3xl overflow-hidden bg-[#FBF7F0] outline-none'
       >
         <button
           onClick={onClose}
@@ -204,7 +248,9 @@ const ModalShell = ({
           <X className='h-6 w-6' />
         </button>
 
-        <div className='max-h-[96vh] overflow-y-auto'>{children}</div>
+        <div className='max-h-[96vh] sm:max-h-[90vh] overflow-y-auto'>
+          {children}
+        </div>
       </div>
     </div>
   );

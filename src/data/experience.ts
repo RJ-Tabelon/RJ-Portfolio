@@ -1,7 +1,18 @@
 import AKIOAI_LONG from '@/assets/Experience/AkioAI/akioai_long.png';
 import AKIOAI_SHORT from '@/assets/Experience/AkioAI/akioai_short.png';
+import AKIOAI_1 from '@/assets/Experience/AkioAI/akioai_1.png';
+import AKIOAI_2 from '@/assets/Experience/AkioAI/akioai_2.png';
+import AKIOAI_3 from '@/assets/Experience/AkioAI/akioai_3.png';
+import AKIOAI_4 from '@/assets/Experience/AkioAI/akioai_4.png';
+
 import EDUAFRICA_LONG from '@/assets/Experience/EDUAfrica/eduafrica_long.png';
 import EDUAFRICA_SHORT from '@/assets/Experience/EDUAfrica/eduafrica_short.png';
+import EDUAFRICA_1 from '@/assets/Experience/EDUAfrica/eduafrica_1.png';
+import EDUAFRICA_2 from '@/assets/Experience/EDUAfrica/eduafrica_2.png';
+import EDUAFRICA_3 from '@/assets/Experience/EDUAfrica/eduafrica_3.png';
+import EDUAFRICA_4 from '@/assets/Experience/EDUAfrica/eduafrica_4.png';
+import EDUAFRICA_5 from '@/assets/Experience/EDUAfrica/eduafrica_5.png';
+import EDUAFRICA_6 from '@/assets/Experience/EDUAfrica/eduafrica_6.png';
 
 export type ExperienceType = {
   id: string;
@@ -15,6 +26,7 @@ export type ExperienceType = {
   logoShort: string;
   tech: string[];
   bullets: string[];
+  images?: string[];
 };
 
 export const experiences: ExperienceType[] = [
@@ -22,97 +34,74 @@ export const experiences: ExperienceType[] = [
     id: 'akioai',
     company: 'AKIO AI',
     role: 'Software Engineering Intern',
-    location: 'Remote',
+    location: 'Gainesville, FL',
     startDate: 'Oct 2025',
     endDate: 'Present',
     type: 'Internship',
     logoLong: AKIOAI_LONG,
     logoShort: AKIOAI_SHORT,
-    tech: ['React', 'TypeScript', 'Tailwind CSS', 'Figma', 'Node.js'],
+    tech: [
+      'JavaScript',
+      'React',
+      'Tailwind CSS',
+      'Recharts',
+      'Figma',
+      'Git',
+      'GitHub'
+    ],
     bullets: [
-      'Designed and built therapist and parent dashboards used in live therapy sessions',
-      'Translated Figma prototypes into reusable React components with Tailwind CSS',
-      'Implemented interactive charts, conversation transcripts, and real-time note-taking tools',
-      'Collaborated cross-functionally to improve usability and therapist workflows'
-    ]
+      'Architected and shipped a production React dashboard using modular, composable components, supporting live therapy sessions and enabling regular feature releases without introducing critical UI regressions.',
+      'Translated Figma workflows into reusable, parameterized React + Tailwind components, reducing UI duplication and accelerating feature development.',
+      'Built a speech-therapy analytics dashboard with Recharts, using client-side aggregation and memoization to efficiently visualize speech events generated during gameplay.',
+      'Implemented real-time therapy note-taking interfaces using controlled inputs and debounced state updates, enabling in-session documentation and reducing post-session administrative overhead for clinicians.',
+      'Redesigned dashboard navigation and data hierarchy using task-based grouping and progressive disclosure, lowering cognitive load and speeding access to clinically relevant session data.',
+      'Validated edge cases and failure scenarios through live-session testing with clinicians and product stakeholders, identifying and resolving issues before they impacted production usage.'
+    ],
+
+    images: [AKIOAI_1, AKIOAI_2, AKIOAI_3, AKIOAI_4]
   },
   {
     id: 'edu-africa',
     company: 'EDU Africa',
     role: 'Software Engineering Intern',
     location: 'Cape Town, South Africa',
-    startDate: 'May 2024',
-    endDate: 'Jul 2024',
+    startDate: 'May 2025',
+    endDate: 'Jun 2025',
     type: 'Internship',
     logoLong: EDUAFRICA_LONG,
     logoShort: EDUAFRICA_SHORT,
-    tech: ['Python', 'Data Analysis', 'Geospatial Data', 'Research'],
-    bullets: [
-      'Developed data-driven tools to analyze environmental and community impact datasets',
-      'Worked with geospatial and real-world data to support sustainability research initiatives',
-      'Collaborated with international teams to translate technical findings into actionable insights',
-      'Presented results to stakeholders, emphasizing clarity and real-world impact'
-    ]
-  },
-  {
-    id: 'pickleportal',
-    company: 'PicklePortal',
-    role: 'Full-Stack & IoT Developer',
-    location: 'Gainesville, FL',
-    startDate: 'Jan 2025',
-    endDate: 'Present',
-    type: 'Research',
-    logoShort: AKIOAI_SHORT,
-    logoLong: AKIOAI_LONG,
     tech: [
-      'ESP32',
-      'Firebase',
+      'JavaScript',
+      'MongoDB',
+      'Express.js',
       'Node.js',
       'React',
-      'WebSockets',
-      'Computer Vision'
+      'Tailwind CSS',
+      'REST API',
+      'Figma',
+      'Jira',
+      'Git',
+      'GitHub'
     ],
     bullets: [
-      'Built a real-time court monitoring system using ESP32 sensors and live MJPEG video streaming',
-      'Designed a full-stack dashboard to visualize court usage, queues, and availability',
-      'Implemented real-time updates using WebSockets and Firebase',
-      'Integrated hardware, backend, and frontend systems into a cohesive production-ready platform'
-    ]
-  },
-  {
-    id: 'sase',
-    company: 'UF SASE',
-    role: 'Director of Technology',
-    location: 'University of Florida',
-    startDate: 'Aug 2024',
-    endDate: 'Present',
-    type: 'Contract',
-    logoShort: AKIOAI_SHORT,
-    logoLong: AKIOAI_LONG,
-    tech: ['React', 'TypeScript', 'Tailwind CSS', 'Firebase', 'CI/CD'],
-    bullets: [
-      'Led development of internal tools and public-facing websites for student and alumni engagement',
-      'Built scalable dashboards to support hackathon and organization operations',
-      'Collaborated with cross-functional leadership to align technical solutions with organizational goals',
-      'Mentored developers and enforced clean, maintainable frontend architecture'
-    ]
-  },
-  {
-    id: 'firefinder',
-    company: 'FireFinder',
-    role: 'Software Engineer',
-    location: 'Remote',
-    startDate: 'Aug 2023',
-    endDate: 'Dec 2023',
-    type: 'Research',
-    logoShort: AKIOAI_SHORT,
-    logoLong: AKIOAI_LONG,
-    tech: ['Python', 'Machine Learning', 'Data Visualization', 'GIS'],
-    bullets: [
-      'Developed a wildfire risk analysis platform using real-world environmental data',
-      'Applied machine learning techniques to identify high-risk fire zones',
-      'Visualized geospatial data to improve interpretability for non-technical users',
-      'Focused on translating complex data into actionable insights for public safety'
+      'Developed a role-based web platform to digitize public-sector housing audits, replacing paper workflows with authenticated CRUD pipelines and audit-trail logging across 30 municipalities.',
+      'Implemented server-side pagination and filtered query paths to operate over a 600K+ record dataset, keeping per-session data loads to hundreds of records.',
+      'Architected paginated REST APIs and lazy-loaded React views, enabling fast browse and filter workflows without full dataset fetches.',
+      'Built client-side aggregation pipelines and interactive visualizations to summarize demographic, regional, and wait-time data, enabling stakeholders to identify allocation bottlenecks within a single consolidated dashboard.',
+      'Designed the complete website in Figma, defining end-to-end user flows and interaction patterns across all core pages.',
+      'Implemented modular React + Tailwind components, reducing UI duplication and lowering regression risk during feature expansion.',
+      'Optimized frontend performance through responsive layout constraints, asset minimization, and deferred loading to preserve usability on low-end devices and unstable network connections.',
+      'Owned end-to-end project execution by defining technical scope, decomposing features into Jira-tracked tasks, and enforcing sprint-level delivery milestones to ship a production-ready system.',
+      'Ran iterative usability testing with 22 stakeholders and translated qualitative feedback into navigation and data-flow refactors across 5 sprint cycles, reducing friction across core audit workflows.'
+    ],
+
+    images: [
+      EDUAFRICA_1,
+      EDUAFRICA_2,
+      EDUAFRICA_3,
+      EDUAFRICA_4,
+      EDUAFRICA_5,
+      EDUAFRICA_6
     ]
   }
 ];
