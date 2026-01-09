@@ -139,7 +139,7 @@ const ExperienceSection = () => {
   };
 
   return (
-    <section className='relative w-full bg-experience px-10 py-16 border-l border-r border-b border-[#d7cfbf] overflow-hidden'>
+    <section className='relative w-full bg-experience px-10 pt-16 pb-24 border-l border-r border-b border-[#d7cfbf] overflow-hidden'>
       <div className='mx-auto max-w-[1200px]'>
         {/* header */}
         <div className='mx-auto max-w-[980px]'>

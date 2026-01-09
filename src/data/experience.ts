@@ -14,6 +14,16 @@ import EDUAFRICA_4 from '@/assets/Experience/EDUAfrica/eduafrica_4.png';
 import EDUAFRICA_5 from '@/assets/Experience/EDUAfrica/eduafrica_5.png';
 import EDUAFRICA_6 from '@/assets/Experience/EDUAfrica/eduafrica_6.png';
 
+import SWT_LONG from '@/assets/Experience/SWT/swt_long.png';
+import SWT_SHORT from '@/assets/Experience/SWT/swt_short.png';
+import SWT_1 from '@/assets/Experience/SWT/swt_1.png';
+
+import DSSD_LONG from '@/assets/Experience/DSSD/dssd_long.png';
+import DSSD_SHORT from '@/assets/Experience/DSSD/dssd_short.png';
+import DSSD_1 from '@/assets/Experience/DSSD/dssd_1.png';
+import DSSD_2 from '@/assets/Experience/DSSD/dssd_2.png';
+import DSSD_3 from '@/assets/Experience/DSSD/dssd_3.png';
+
 export type ExperienceType = {
   id: string;
   company: string;
@@ -21,7 +31,7 @@ export type ExperienceType = {
   location?: string;
   startDate: string;
   endDate: string;
-  type: 'Internship' | 'Full-time' | 'Contract' | 'Research';
+  type: 'Internship' | 'Leadership & Involvement';
   logoLong: string;
   logoShort: string;
   tech: string[];
@@ -59,6 +69,37 @@ export const experiences: ExperienceType[] = [
     ],
 
     images: [AKIOAI_1, AKIOAI_2, AKIOAI_3, AKIOAI_4]
+  },
+  {
+    id: 'dssd',
+    company: 'Data Science for Sustainable Development (DSSD)',
+    role: 'Lead Frontend Engineer',
+    location: 'Gainesville, FL',
+    startDate: 'Aug 2024',
+    endDate: 'Jul 2025',
+    type: 'Leadership & Involvement',
+    logoLong: DSSD_LONG,
+    logoShort: DSSD_SHORT,
+    tech: [
+      'JavaScript',
+      'React',
+      'Leaflet',
+      'Tailwind CSS',
+      'Recharts',
+      'REST API',
+      'Figma',
+      'Git',
+      'GitHub'
+    ],
+    bullets: [
+      'Led an 11-member frontend team to build an interactive geospatial dashboard visualizing environmental hazard sites, enabling spatial analysis via map-based exploration and dynamic overlays.',
+      'Architected a React + Leaflet mapping pipeline that computes demographic and environmental metrics within user-defined buffer ranges around input locations.',
+      'Designed client-side data flows to fetch, aggregate, and visualize multi-source environmental and census data on demand, supporting comparative analysis across varying buffer sizes without full page reloads.',
+      'Built interactive charting and reporting workflows that convert map-based analysis results into downloadable PDF summaries for use in academic research and policy analysis.',
+      'Enforced frontend engineering standards through code reviews, testing requirements, and documentation, improving long-term maintainability and reducing regression risk as the dataset and feature surface expanded.',
+      'Collaborated directly with a university geography research lead to translate research requirements into technical constraints, balancing accuracy, performance, and usability for both educational and research users.'
+    ],
+    images: [DSSD_1, DSSD_2, DSSD_3]
   },
   {
     id: 'edu-africa',
@@ -102,6 +143,43 @@ export const experiences: ExperienceType[] = [
       EDUAFRICA_4,
       EDUAFRICA_5,
       EDUAFRICA_6
+    ]
+  },
+  {
+    id: 'swt',
+    company: 'Society of Asian Scientists and Engineers (SASE)',
+    role: 'Lead Backend Engineer',
+    location: 'Gainesville, FL',
+    startDate: 'Sep 2025',
+    endDate: 'Present',
+    type: 'Leadership & Involvement',
+    logoLong: SWT_LONG,
+    logoShort: SWT_SHORT,
+    tech: [
+      'TypeScript',
+      'Vinxi',
+      'Hono',
+      'Bun',
+      'SQLite',
+      'Turso',
+      'Drizzle',
+      'Vercel',
+      'REST API',
+      'Docker',
+      'Git',
+      'GitHub'
+    ],
+    bullets: [
+      'Led a 9-engineer backend Scrum team for the maintenance of the UF SASE website, defining sprint scope and enforcing clear service ownership.',
+      'Ran weekly sprint planning and reviews, decomposing features into executable tasks to support reliable delivery on a consistent 2-week release cadence.',
+      'Reviewed pull requests to enforce code quality, correctness, and consistency before production releases.',
+      'Built an alumni discovery pipeline that ingests user-submitted LinkedIn profile URLs and extracts normalized alumni attributes (name, graduation year, current company, past companies) using structured parsing and validation rules.',
+      'Integrated a Dockerized LinkedIn MCP server as a controlled ingestion interface for third-party LinkedIn profile and company data.',
+      'Isolated LinkedIn scraping behind the MCP server using process-level isolation and containerization, reducing the risk of scraping failures affecting core backend functionality.',
+      'Designed a normalization and ingestion layer to deduplicate and validate scraped alumni records before persistence.'
+    ],
+    images: [
+      SWT_1
     ]
   }
 ];
