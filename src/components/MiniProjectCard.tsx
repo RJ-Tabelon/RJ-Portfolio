@@ -49,12 +49,14 @@ const MiniProjectCard: React.FC<MiniProjectCardProps> = ({
       />
 
       {/* Project name */}
-      <h3 className='text-lg md:text-xl font-semibold text-primary opacity-90 transition-colors'>
+      <h3 className='text-lg md:text-xl font-semibold text-primary transition-colors'>
         {project.name}
       </h3>
 
       {/* Description */}
-      <p className='text-xs md:text-sm text-gray-700 mb-2 md:mb-3'>{project.description}</p>
+      <p className='text-xs md:text-sm text-gray-700 mb-2 md:mb-3'>
+        {project.description}
+      </p>
 
       {/* Links */}
       <div className='flex gap-4 text-xs md:text-sm font-medium mb-3 md:mb-4'>
@@ -95,16 +97,24 @@ const MiniProjectCard: React.FC<MiniProjectCardProps> = ({
 
       {/* Tech stack */}
       <div className='flex flex-wrap gap-2 mb-3 md:mb-4'>
-        {project.tech.map((tech, index) => (
+        {project.tech.slice(0, 6).map((tech, index) => (
           <span key={index} className='tech-chip'>
             {tech}
           </span>
         ))}
+        {project.tech.length > 6 && (
+          <span
+            className='tech-chip'
+            aria-label={`and ${project.tech.length - 6} more`}
+          >
+            +{project.tech.length - 6} more
+          </span>
+        )}
       </div>
 
       {/* View more CTA */}
       <div>
-        <div className='text-sm view-more md:border-b-2 opacity-90 hover:opacity-90'>
+        <div className='text-sm view-more md:border-b-2'>
           <span>View more</span>
           <ArrowUpRight className='h-4 w-4' />
         </div>
