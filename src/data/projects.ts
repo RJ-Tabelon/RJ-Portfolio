@@ -5,6 +5,8 @@ import CORECRM_4 from '@/assets/Projects/CoreCRM/tasks.png';
 import CORECRM_5 from '@/assets/Projects/CoreCRM/signin.png';
 
 import PICKLEPORTAL_1 from '@/assets/Projects/PicklePortal/HomePage.png';
+import PICKLEPORTAL_2 from '@/assets/Projects/PicklePortal/ComputerVision.png';
+
 
 export type ProjectType = {
   id: string;
@@ -24,7 +26,7 @@ export const projects: ProjectType[] = [
     description:
       'A full-stack Customer Relationship Management (CRM) platform for managing contacts, deals, and tasks.',
     githubLink: 'https://github.com/RJ-Tabelon/CoreCRM',
-    websiteLink: '54.152.33.219',
+    websiteLink: 'http://54.152.33.219',
     tech: [
       'AWS EC2',
       'Nginx',
@@ -72,22 +74,39 @@ export const projects: ProjectType[] = [
     id: 'pickleportal',
     name: 'PicklePortal',
     description:
-      'An IoT-powered court monitoring system that tracks availability, queues, and live video for pickleball courts.',
-    githubLink: 'https://github.com/your-username/pickleportal',
+      'An IoT-powered court monitoring system that uses computer vision and sensors to track availability, queues, and live video for pickleball courts.',
+    githubLink: 'https://github.com/RJ-Tabelon/PicklePortal',
     tech: [
       'ESP32',
-      'Firebase',
+      'Arduino',
+      'C++',
+      'Firebase RTDB',
+      'Python',
+      'Ultralytics YOLOv8',
+      'LED',
+      'LCD',
+      'LDR',
       'Node.js',
+      'Express.js',
+      'TypeScript',
+      'OpenCV',
+      'NumPy',
       'React',
-      'WebSockets',
-      'Computer Vision'
+      'TypeScript',
+      'Vite',
+      'Tailwind CSS',
+      'Git',
+      'GitHub'
     ],
-    images: [PICKLEPORTAL_1],
+    images: [PICKLEPORTAL_1, PICKLEPORTAL_2],
     bullets: [
-      'Built a real-time monitoring system using ESP32 sensors and MJPEG video streaming',
-      'Designed a live dashboard to visualize court usage and availability',
-      'Implemented real-time updates using WebSockets and Firebase',
-      'Integrated hardware, backend, and frontend systems into a cohesive platform'
+      'Designed and built an end-to-end IoT pipeline connecting ESP32 camera nodes, a Node.js backend, a long-lived Python YOLOv8 worker, and Firebase RTDB to track pickleball court occupancy and queues in real time.',
+      'Implemented a zero-copy image ingestion path by streaming JPEG frames from ESP32 devices into a persistent Python worker via stdin/stdout, avoiding per-request process startup and reducing detection latency under continuous load.',
+      'Architected Firebase Realtime Database as the system’s shared state layer, enabling eventual-consistent synchronization across embedded devices, backend inference, and a React dashboard without direct coupling.',
+      'Built backend preview and caching mechanisms that store the latest annotated frame in memory and expose low-latency inspection endpoints for debugging vision output in production-like scenarios.',
+      'Developed a React + TypeScript dashboard that subscribes to real-time database updates and derives court status states (available / occupied / queued), ensuring UI state remains consistent with hardware-reported signals.',
+      'Engineered ESP32 camera firmware with two operating modes: periodic JPEG uploads for ML inference and an MJPEG live stream for real-time viewing, switching modes to manage bandwidth and ESP32 resource limits while improving debugging visibility.',
+      'Integrated physical queue sensors (photoresistors) with cloud state updates, translating noisy analog readings into stable queue counts and driving LEDs/LCDs from the same authoritative data source as the web UI.'
     ]
   }
 ];
