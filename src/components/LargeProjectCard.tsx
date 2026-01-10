@@ -76,7 +76,7 @@ const ModalShell = ({
 
   return (
     <div
-      className='fixed inset-0 z-50 bg-black/50 py-[2vh] px-6 sm:py-[5vh]'
+      className='fixed inset-0 z-50 bg-black/50 pt-[2vh] pb-[12vh] px-6 sm:pt-[5vh] sm:pb-[5vh]'
       onMouseDown={onClose}
     >
       <div
@@ -94,7 +94,7 @@ const ModalShell = ({
           <X className='h-6 w-6' />
         </button>
 
-        <div className='max-h-[96vh] sm:max-h-[90vh] overflow-y-auto'>
+        <div className='max-h-[86vh] sm:max-h-[90vh] overflow-y-auto'>
           {children}
         </div>
       </div>
