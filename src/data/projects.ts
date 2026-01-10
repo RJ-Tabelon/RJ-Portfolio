@@ -4,9 +4,8 @@ import CORECRM_3 from '@/assets/Projects/CoreCRM/deals.png';
 import CORECRM_4 from '@/assets/Projects/CoreCRM/tasks.png';
 import CORECRM_5 from '@/assets/Projects/CoreCRM/signin.png';
 
-import PICKLEPORTAL_1 from '@/assets/Projects/PicklePortal/HomePage.png';
-import PICKLEPORTAL_2 from '@/assets/Projects/PicklePortal/ComputerVision.png';
-
+import PICKLEPORTAL_1 from '@/assets/Projects/PicklePortal/homepage.png';
+import PICKLEPORTAL_2 from '@/assets/Projects/PicklePortal/computervision.png';
 
 export type ProjectType = {
   id: string;
