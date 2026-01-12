@@ -24,7 +24,7 @@ const Resume = () => {
   }, []);
 
   return (
-    <div className='bg-resume min-h-dvh flex flex-col items-center pt-10 pb-20 px-8 sm:px-12 md:px-16 border-x border-b border-color'>
+    <div className='bg-resume flex flex-col items-center pt-10 pb-18 px-8 sm:px-12 md:px-16 border-x border-b border-color'>
       <div className='text-center mb-4 shrink-0'>
         <h1 className='text-3xl sm:text-4xl font-bold text-primary'>
           My Resume
@@ -35,12 +35,13 @@ const Resume = () => {
         id='pdf-container'
         className='w-full flex items-start justify-center flex-col'
       >
-        <Document file={resumePDF}>
+        <Document file={resumePDF} loading={null}>
           <Page
             pageNumber={1}
             width={containerWidth}
             renderTextLayer={true}
             renderAnnotationLayer={true}
+            loading={null}
             className='border border-color'
           />
         </Document>
