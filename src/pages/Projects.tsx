@@ -108,7 +108,7 @@ const Projects = () => {
   const hasActiveFilters = searchQuery || selectedTech.length > 0;
 
   return (
-    <div className='min-h-screen bg-project py-10 px-10 sm:px-12 border-x border-b border-color'>
+    <div className='min-h-[calc(100dvh-var(--navbar-height))] bg-project px-10 pt-10 pb-20 sm:px-12 border-x border-b border-color'>
       {/* Header */}
       <div className='max-w-6xl mx-auto mb-12'>
         <div className='text-center mb-4'>
@@ -177,7 +177,7 @@ const Projects = () => {
 
             {isTechFilterOpen && (
               <div className='absolute left-0 right-0 top-full z-20 mt-2 overflow-hidden border-2 border-color bg-[#FBF7F0]'>
-                <div className='max-h-[280px] overflow-auto px-6 py-4'>
+                <div className='max-h-70 overflow-auto px-6 py-4'>
                   <div className='flex flex-wrap gap-3'>
                     {allTechnologies.map(tech => {
                       const isSelected = selectedTech.includes(tech);

@@ -23,7 +23,10 @@ export default function Navbar() {
   }, [isMenuOpen]);
 
   return (
-    <nav className='relative flex items-center justify-between px-6 py-4 border-b border-color bg-navbar'>
+    <nav
+      id='site-navbar'
+      className='relative flex items-center justify-between px-6 py-4 border-b border-color bg-navbar'
+    >
       <h1 className='lg:text-lg font-bold'>Rainier Joshua (RJ) Tabelon</h1>
 
       {/* Desktop Navigation */}

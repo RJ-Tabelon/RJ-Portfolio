@@ -24,8 +24,8 @@ const Resume = () => {
   }, []);
 
   return (
-    <div className='bg-resume h-[calc(100vh-57px)] flex flex-col items-center py-10 px-8 sm:px-12 md:px-16 border-x border-b border-color overflow-auto'>
-      <div className='text-center mb-4 flex-shrink-0'>
+    <div className='bg-resume min-h-[calc(100dvh-var(--navbar-height))] flex flex-col items-center pt-10 pb-20 px-8 sm:px-12 md:px-16 border-x border-b border-color'>
+      <div className='text-center mb-4 shrink-0'>
         <h1 className='text-3xl sm:text-4xl font-bold text-primary'>
           My Resume
         </h1>
@@ -45,7 +45,7 @@ const Resume = () => {
           />
         </Document>
 
-        <div className='mt-4 flex-shrink-0 w-full flex justify-center'>
+        <div className='mt-4 shrink-0 w-full flex justify-center'>
           <a
             href={resumePDF}
             download='RJ_Resume.pdf'

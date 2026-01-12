@@ -9,6 +9,10 @@ html {
   font-family: var(--font-sans);
 }
 
+:root {
+  --navbar-height: 0px;
+}
+
 @layer utilities {
   /* Text */
   .text-primary {
@@ -75,8 +79,8 @@ html {
   }
 
   .bg-experiencecard {
-    background-color: #FBF7F0;
-    background-image: url("./textures/little-pluses.png");
+    background-color: #fbf7f0;
+    background-image: url('./textures/little-pluses.png');
   }
 
   /* Project */
@@ -88,7 +92,7 @@ html {
   /* Resume */
   .bg-resume {
     background-color: #f9dbca;
-    background-image: url("./textures/rough-cloth.png");
+    background-image: url('./textures/rough-cloth.png');
   }
 
   /* Border/Ring */
