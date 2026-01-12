@@ -1,14 +1,10 @@
 import { useState, useEffect } from 'react';
-import { Document, Page, pdfjs } from 'react-pdf';
+import { Document, Page } from 'react-pdf';
 import { Download } from 'lucide-react';
 import { useLocation } from 'react-router-dom';
 import 'react-pdf/dist/Page/AnnotationLayer.css';
 import 'react-pdf/dist/Page/TextLayer.css';
 import resumePDF from '@/assets/Resume/RJ_Resume.pdf';
-
-import pdfWorkerSrc from 'pdfjs-dist/build/pdf.worker.min.mjs?url';
-
-pdfjs.GlobalWorkerOptions.workerSrc = pdfWorkerSrc;
 
 const Resume = () => {
   const [containerWidth, setContainerWidth] = useState(0);
