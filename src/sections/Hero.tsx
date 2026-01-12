@@ -33,6 +33,9 @@ const Hero = () => {
                 <img
                   src={Headshot}
                   alt='RJ Tabelon Headshot'
+                  loading='eager'
+                  fetchPriority='high'
+                  decoding='async'
                   className='h-38 w-auto object-cover'
                 />
               </div>
@@ -183,6 +186,9 @@ const Hero = () => {
                   <img
                     src={Headshot}
                     alt='RJ Tabelon Headshot'
+                    loading='eager'
+                    fetchPriority='high'
+                    decoding='async'
                     className='h-65 lg:h-70 w-auto object-cover '
                   />
                 </div>

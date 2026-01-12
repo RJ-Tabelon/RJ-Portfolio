@@ -1,16 +1,22 @@
 import { useState, useEffect } from 'react';
 import { Document, Page, pdfjs } from 'react-pdf';
 import { Download } from 'lucide-react';
+import { useLocation } from 'react-router-dom';
 import 'react-pdf/dist/Page/AnnotationLayer.css';
 import 'react-pdf/dist/Page/TextLayer.css';
 import resumePDF from '@/assets/Resume/RJ_Resume.pdf';
 
-pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
+import pdfWorkerSrc from 'pdfjs-dist/build/pdf.worker.min.mjs?url';
+
+pdfjs.GlobalWorkerOptions.workerSrc = pdfWorkerSrc;
 
 const Resume = () => {
   const [containerWidth, setContainerWidth] = useState(0);
+  const { pathname } = useLocation();
+  const isActive = pathname === '/resume';
 
   useEffect(() => {
+    if (!isActive) return;
     const updateWidth = () => {
       const container = document.getElementById('pdf-container');
       if (container) {
@@ -21,7 +27,7 @@ const Resume = () => {
     updateWidth();
     window.addEventListener('resize', updateWidth);
     return () => window.removeEventListener('resize', updateWidth);
-  }, []);
+  }, [isActive]);
 
   return (
     <div className='bg-resume flex flex-col items-center pt-10 pb-18 px-8 sm:px-12 md:px-16 border-x border-b border-color'>
