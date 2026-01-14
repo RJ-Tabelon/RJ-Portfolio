@@ -26,7 +26,7 @@ const Resume = () => {
   }, [isActive]);
 
   return (
-    <div className='min-h-[calc(100dvh-var(--navbar-height))] bg-resume flex flex-col items-center pt-10 pb-18 px-8 sm:px-12 md:px-16 border-x border-b border-color'>
+    <div className='min-h-dvh bg-resume flex flex-col items-center pt-10 pb-18 px-8 sm:px-12 md:px-16 border-x border-b border-color'>
       <div className='text-center mb-4 shrink-0'>
         <h1 className='text-3xl sm:text-4xl font-bold text-primary'>
           My Resume
