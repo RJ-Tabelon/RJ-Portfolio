@@ -108,7 +108,7 @@ const Projects = () => {
   const hasActiveFilters = searchQuery || selectedTech.length > 0;
 
   return (
-    <div className='min-h-[calc(100dvh-var(--navbar-height))] bg-project px-10 pt-10 pb-18 sm:px-12 border-x border-b border-color'>
+    <div className='min-h-[calc(100dvh-var(--navbar-height))] bg-project px-10 pt-10 pb-24 sm:px-12 border-x border-b border-color'>
       {/* Header */}
       <div className='max-w-6xl mx-auto mb-12'>
         <div className='text-center mb-4'>
@@ -229,7 +229,7 @@ const Projects = () => {
       {/* Projects grid */}
       <div className='max-w-6xl mx-auto'>
         {filteredProjects.length > 0 ? (
-          <div className='grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12'>
+          <div className='grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 mr-2'>
             {filteredProjects.map(project => (
               <MiniProjectCard
                 key={project.id}

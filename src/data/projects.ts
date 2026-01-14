@@ -7,6 +7,13 @@ import CORECRM_5 from '@/assets/Projects/CoreCRM/signin.png';
 import PICKLEPORTAL_1 from '@/assets/Projects/PicklePortal/homepage.png';
 import PICKLEPORTAL_2 from '@/assets/Projects/PicklePortal/computervision.png';
 
+import TETRIS_1 from '@/assets/Projects/Tetris/PlayingGame.png';
+import TETRIS_2 from '@/assets/Projects/Tetris/GameOver.png';
+
+import CHIMCHAT_1 from '@/assets/Projects/ChimChat/ui-ux.png';
+
+import NOTEPANDA_1 from '@/assets/Projects/NotePanda/Home.png';
+
 export type ProjectType = {
   id: string;
   name: string;
@@ -106,6 +113,80 @@ export const projects: ProjectType[] = [
       'Developed a React + TypeScript dashboard that subscribes to real-time database updates and derives court status states (available / occupied / queued), ensuring UI state remains consistent with hardware-reported signals.',
       'Engineered ESP32 camera firmware with two operating modes: periodic JPEG uploads for ML inference and an MJPEG live stream for real-time viewing, switching modes to manage bandwidth and ESP32 resource limits while improving debugging visibility.',
       'Integrated physical queue sensors (photoresistors) with cloud state updates, translating noisy analog readings into stable queue counts and driving LEDs/LCDs from the same authoritative data source as the web UI.'
+    ]
+  },
+  {
+    id: 'tetris',
+    name: 'Tetris Game Engine',
+    description:
+      'A C++ desktop Tetris game featuring a deterministic game loop, collision-safe gameplay logic, and a clean modular engine design.',
+    githubLink: 'https://github.com/RJ-Tabelon/Tetris',
+    tech: ['C++', 'raylib', 'GNU Make'],
+    images: [TETRIS_1, TETRIS_2],
+    bullets: [
+      'Implemented a real-time Tetris game engine in C++, designing a fixed-step game loop with frame-rate–independent gravity, deterministic input handling, and centralized state management running at 60 FPS.',
+      'Built collision-safe tetromino movement and rotation using a 20×10 integer grid, enforcing constant-time boundary checks, lock conditions, and row-clear compaction to guarantee correctness across all piece orientations.',
+      'Designed modular engine components (Game, Grid, Block) with clear ownership boundaries, enabling isolated reasoning about rendering, gameplay rules, and data flow while supporting audio playback and next-piece previews without frame drops.'
+    ]
+  },
+  {
+    id: 'chimchat',
+    name: 'ChimChat',
+    description:
+      'A real-time group chat application with persistent messaging and server-orchestrated AI commands for summarization and contextual Q&A.',
+    githubLink: 'https://github.com/RJ-Tabelon/ChimChat',
+    tech: [
+      'Socket.IO',
+      'Firebase Firestore',
+      'Ollama',
+      'TensorFlow.js',
+      'Node.js',
+      'Express.js',
+      'JavaScript',
+      'HTML',
+      'CSS',
+      'dotenv',
+      'CORS',
+      'Git',
+      'GitHub'
+    ],
+    images: [CHIMCHAT_1],
+    bullets: [
+      'Designed and built a real-time group chat system using Socket.IO and Node.js, broadcasting messages to all connected clients while persisting chat history in Firebase Firestore to support reconnects and late joiners.',
+      'Implemented server-side message replay by loading and emitting the last 10 persisted messages on client connect, maintaining consistent chat state without scanning unbounded history.',
+      'Integrated command-driven AI workflows (`/summarize`, `/question`, `/environment`) by assembling Firestore context and optional sensor JSON, invoking a local Ollama LLM, and broadcasting responses back into the chat stream.',
+      'Enforced client-side content safety by applying TensorFlow.js toxicity filtering before message emission, preventing harmful text from entering the real-time pipeline while preserving low-latency messaging.'
+    ]
+  },
+  {
+    id: 'notepanda',
+    name: 'NotePanda',
+    description:
+      'A full-stack note-taking application with CRUD workflows, distributed rate limiting, and a responsive, production-ready UI.',
+    githubLink: 'https://github.com/RJ-Tabelon/NotePanda',
+    tech: [
+      'Upstash Redis',
+      'MongoDB',
+      'Mongoose',
+      'React',
+      'React Router',
+      'Vite',
+      'Tailwind CSS',
+      'DaisyUI',
+      'Node.js',
+      'Express.js',
+      'Axios',
+      'JavaScript',
+      'REST APIs',
+      'Git',
+      'GitHub'
+    ],
+    images: [NOTEPANDA_1],
+    bullets: [
+      'Designed and shipped a full-stack CRUD notes platform using React and Express with RESTful APIs and MongoDB persistence, enabling low-latency create/read/update/delete workflows across desktop and mobile breakpoints.',
+      'Implemented distributed IP-based rate limiting with Upstash Redis (100 requests/minute), preventing API abuse while preserving stateless backend scaling characteristics.',
+      'Architected a modular backend with controller–middleware separation, schema validation, and centralized error handling to improve reliability and reduce regression risk during feature iteration.',
+      'Built a responsive, production-ready frontend with client-side routing, optimistic UI updates, and real-time toast feedback, improving perceived performance and user interaction clarity.'
     ]
   }
 ];

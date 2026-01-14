@@ -53,6 +53,7 @@ export const experiences: ExperienceType[] = [
     tech: [
       'JavaScript',
       'React',
+      'React Router',
       'Tailwind CSS',
       'Recharts',
       'Figma',
@@ -63,7 +64,7 @@ export const experiences: ExperienceType[] = [
       'Architected and shipped a production React dashboard using modular, composable components, supporting live therapy sessions and enabling regular feature releases without introducing critical UI regressions.',
       'Translated Figma workflows into reusable, parameterized React + Tailwind components, reducing UI duplication and accelerating feature development.',
       'Built a speech-therapy analytics dashboard with Recharts, using client-side aggregation and memoization to efficiently visualize speech events generated during gameplay.',
-      'Implemented real-time therapy note-taking interfaces using controlled inputs and debounced state updates, enabling in-session documentation and reducing post-session administrative overhead for clinicians.',
+      'Engineered a real-time therapy note-taking system that records live session conversations and converts them into structured notes, supporting in-session documentation and minimizing post-session overhead.',
       'Redesigned dashboard navigation and data hierarchy using task-based grouping and progressive disclosure, lowering cognitive load and speeding access to clinically relevant session data.',
       'Validated edge cases and failure scenarios through live-session testing with clinicians and product stakeholders, identifying and resolving issues before they impacted production usage.'
     ],
@@ -173,13 +174,13 @@ export const experiences: ExperienceType[] = [
       'Led a 9-engineer backend Scrum team for the maintenance of the UF SASE website, defining sprint scope and enforcing clear service ownership.',
       'Ran weekly sprint planning and reviews, decomposing features into executable tasks to support reliable delivery on a consistent 2-week release cadence.',
       'Reviewed pull requests to enforce code quality, correctness, and consistency before production releases.',
-      'Built an alumni discovery pipeline that ingests user-submitted LinkedIn profile URLs and extracts normalized alumni attributes (name, graduation year, current company, past companies) using structured parsing and validation rules.',
-      'Integrated a Dockerized LinkedIn MCP server as a controlled ingestion interface for third-party LinkedIn profile and company data.',
-      'Isolated LinkedIn scraping behind the MCP server using process-level isolation and containerization, reducing the risk of scraping failures affecting core backend functionality.',
-      'Designed a normalization and ingestion layer to deduplicate and validate scraped alumni records before persistence.'
+      'Designed and implemented an admin-gated data refresh pipeline that ingests LinkedIn profiles via a persistent MCP client and atomically upserts normalized alumni records, enabling one-click synchronization across all users without per-request reconnections.',
+      'Built a resilient profile-parsing layer that normalizes inconsistent third-party data (current role, past companies) using defensive type guards, fallbacks, and deduplication logic to maintain data integrity under partial or malformed inputs.',
+      'Implemented idempotent, conflict-safe database writes using primary-key upserts and field-level merge logic, ensuring refreshes are repeatable and do not overwrite higher-quality existing data during batch updates.',
+      'Engineered end-to-end refresh observability by tracking per-user update, skip, and error states and surfacing structured failure reports in the admin UI, enabling rapid debugging of third-party ingestion failures at scale.',
+      'Reduced ingestion latency and connection overhead by reusing a single MCP session with bounded retries and exponential backoff, preventing cascading failures from transient LinkedIn timeouts.',
+      'Integrated a strongly-typed API boundary with schema validation on both client and server, preventing invalid refresh responses from reaching the UI and eliminating an entire class of runtime data errors.'
     ],
-    images: [
-      SWT_1
-    ]
+    images: [SWT_1]
   }
 ];
