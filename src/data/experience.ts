@@ -61,9 +61,9 @@ export const experiences: ExperienceType[] = [
       'GitHub'
     ],
     bullets: [
-      'Architected and shipped a production React dashboard using modular, composable components, supporting live therapy sessions and enabling regular feature releases without introducing critical UI regressions.',
+      'Architected and shipped a production speech-analytics dashboard, aggregating thousands of speech events generated from therapy sessions and video game interactions.',
       'Translated Figma workflows into reusable, parameterized React + Tailwind components, reducing UI duplication and accelerating feature development.',
-      'Built a speech-therapy analytics dashboard with Recharts, using client-side aggregation and memoization to efficiently visualize speech events generated during gameplay.',
+      'Optimized rendering via memoization and batched updates, preventing UI stalls under high-frequency data updates.',
       'Engineered a real-time therapy note-taking system that records live session conversations and converts them into structured notes, supporting in-session documentation and minimizing post-session overhead.',
       'Redesigned dashboard navigation and data hierarchy using task-based grouping and progressive disclosure, lowering cognitive load and speeding access to clinically relevant session data.',
       'Validated edge cases and failure scenarios through live-session testing with clinicians and product stakeholders, identifying and resolving issues before they impacted production usage.'
