@@ -52,7 +52,7 @@ async function main() {
   await writePublicFile('favicon.ico', ico);
 }
 
-main().catch((err) => {
+main().catch(err => {
   // eslint-disable-next-line no-console
   console.error(err);
   process.exitCode = 1;
