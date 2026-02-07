@@ -51,6 +51,10 @@ export const experiences: ExperienceType[] = [
     logoLong: AKIOAI_LONG,
     logoShort: AKIOAI_SHORT,
     tech: [
+      'AWS RDS',
+      'PostgreSQL',
+      'WebSockets',
+      'Go',
       'JavaScript',
       'React',
       'React Router',
@@ -61,12 +65,9 @@ export const experiences: ExperienceType[] = [
       'GitHub'
     ],
     bullets: [
-      'Architected and shipped a production speech-analytics dashboard, aggregating thousands of speech events generated from therapy sessions and video game interactions.',
-      'Translated Figma workflows into reusable, parameterized React + Tailwind components, reducing UI duplication and accelerating feature development.',
-      'Optimized rendering via memoization and batched updates, preventing UI stalls under high-frequency data updates.',
-      'Engineered a real-time therapy note-taking system that records live session conversations and converts them into structured notes, supporting in-session documentation and minimizing post-session overhead.',
-      'Redesigned dashboard navigation and data hierarchy using task-based grouping and progressive disclosure, lowering cognitive load and speeding access to clinically relevant session data.',
-      'Validated edge cases and failure scenarios through live-session testing with clinicians and product stakeholders, identifying and resolving issues before they impacted production usage.'
+      'Reduced real-time speech response latency from 4s to 2s by eliminating per-request TCP overhead with persistent WebSockets and using in-memory audio buffers with concurrent disk I/O in a Unity-to-Go voice pipeline.',
+      'Executed a zero-data-loss migration from self-hosted PostgreSQL to AWS RDS, validating full schema and data integrity and coordinating a safe cutover with rollback guarantees.',
+      'Built a React speech analytics dashboard aggregating 10K+ speech events for therapists to track client performance, improving UI responsiveness by 60% through memoization and batched updates.',
     ],
 
     images: [AKIOAI_1, AKIOAI_2, AKIOAI_3, AKIOAI_4]
